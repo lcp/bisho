@@ -99,13 +99,10 @@ construct_ui (BishoWindow *window, const char *service_name)
     g_hash_table_insert (window->priv->panes, info->name, pane);
     break;
   case AUTH_FACEBOOK:
-    {
-      GtkWidget *pane;
-      pane = bisho_facebook_pane_new (info);
-      gtk_widget_show (pane);
-      gtk_box_pack_start (GTK_BOX (box), pane, FALSE, FALSE, 0);
-      //g_hash_table_insert (window->priv->panes, info->name, pane);
-    }
+    pane = bisho_pane_facebook_new (window->priv->client, info);
+    gtk_widget_show (pane);
+    gtk_box_pack_start (GTK_BOX (box), pane, FALSE, FALSE, 0);
+    g_hash_table_insert (window->priv->panes, info->name, pane);
     break;
   case AUTH_INVALID:
     /* Should never see this, so ignore it */

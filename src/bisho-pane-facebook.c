@@ -125,7 +125,7 @@ get_user_name (BishoPaneFacebook *pane, const char *uid)
   RestXmlNode *node;
   GError *error = NULL;
 
-  g_assert (data);
+  g_assert (pane);
   g_assert (uid);
 
   call = rest_proxy_new_call (priv->proxy);
@@ -141,10 +141,10 @@ get_user_name (BishoPaneFacebook *pane, const char *uid)
 
   node = get_xml (call);
   if (node) {
-    update_widgets (data, LOGGED_IN, rest_xml_node_find (node, "name")->content);
+    update_widgets (pane, LOGGED_IN, rest_xml_node_find (node, "name")->content);
     rest_xml_node_unref (node);
   } else {
-    update_widgets (data, LOGGED_OUT, NULL);
+    update_widgets (pane, LOGGED_OUT, NULL);
   }
 }
 
@@ -155,16 +155,15 @@ log_in_clicked (GtkWidget *button, gpointer user_data)
   BishoPaneFacebook *pane = BISHO_PANE_FACEBOOK (user_data);
   BishoPaneFacebookPrivate *priv = pane->priv;
   char *url;
-/*
+
   RestProxyCall *call;
   RestXmlNode *node;
   GError *error = NULL;
-*/
+
   update_widgets (pane, WORKING, NULL);
 
   /* TODO: async */
-/*
-  call = rest_proxy_new_call (pane->proxy);
+  call = rest_proxy_new_call (priv->proxy);
   rest_proxy_call_set_function (call, "auth.createToken");
 
   if (!rest_proxy_call_sync (call, &error)) {
@@ -176,9 +175,9 @@ log_in_clicked (GtkWidget *button, gpointer user_data)
 
   node = get_xml (call);
 
-  pane->info->facebook.token = g_strdup (node->content);
+  priv->info->facebook.token = g_strdup (node->content);
   rest_xml_node_unref (node);
-*/
+
   url = facebook_proxy_build_login_url (FACEBOOK_PROXY (priv->proxy), priv->info->facebook.token);
   gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (button)), url, GDK_CURRENT_TIME, NULL);
 }
@@ -267,11 +266,11 @@ bisho_pane_facebook_continue_auth (BishoPane *_pane, GHashTable *params)
   guint32 id;
   attrs = gnome_keyring_attribute_list_new ();
   gnome_keyring_attribute_list_append_string (attrs, "server", FACEBOOK_SERVER);
-  gnome_keyring_attribute_list_append_string (attrs, "api-key", pane->info->facebook.app_id);
+  gnome_keyring_attribute_list_append_string (attrs, "api-key", priv->info->facebook.app_id);
 
   result = gnome_keyring_item_create_sync (NULL,
                                            GNOME_KEYRING_ITEM_GENERIC_SECRET,
-                                           pane->info->display_name,
+                                           priv->info->display_name,
                                            attrs, password,
                                            TRUE, &id);
 
@@ -281,7 +280,7 @@ bisho_pane_facebook_continue_auth (BishoPane *_pane, GHashTable *params)
                                                  LIBEXECDIR "/mojito-core",
                                                  id, GNOME_KEYRING_ACCESS_READ);
 
-    call = rest_proxy_new_call (pane->proxy);
+    call = rest_proxy_new_call (priv->proxy);
 
     rest_proxy_call_set_function (call, "Users.hasAppPermission");
     rest_proxy_call_add_param (call, "ext_perm", "publish_stream");
@@ -297,8 +296,8 @@ bisho_pane_facebook_continue_auth (BishoPane *_pane, GHashTable *params)
     rest_xml_node_unref (node);
 
     if (g_strcmp0 (permission, "0") == 0) {
-      url = facebook_proxy_build_permission_url (FACEBOOK_PROXY (pane->proxy), "publish_stream");
-      gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (button)), url, GDK_CURRENT_TIME, NULL);
+      url = facebook_proxy_build_permission_url (FACEBOOK_PROXY (priv->proxy), "publish_stream");
+      gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (priv->button)), url, GDK_CURRENT_TIME, NULL);
     }
   } else {
     update_widgets (pane, LOGGED_OUT, NULL);
@@ -377,7 +376,7 @@ find_key_cb (GnomeKeyringResult result,
       log_out_clicked (NULL, pane);
     }
   } else {
-    update_widgets (data, LOGGED_OUT, NULL);
+    update_widgets (pane, LOGGED_OUT, NULL);
   }
 }
 
@@ -418,7 +417,7 @@ bisho_pane_facebook_new (MojitoClient *client, ServiceInfo *info)
   priv->info = info;
 
   priv->proxy = facebook_proxy_new (info->facebook.app_id, info->facebook.secret);
-  rest_proxy_set_user_agent (pane->proxy, "Bisho/" VERSION);
+  rest_proxy_set_user_agent (priv->proxy, "Bisho/" VERSION);
 
   content = BISHO_PANE (pane)->content;
 
