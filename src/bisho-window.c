@@ -26,7 +26,7 @@
 #include "service-info.h"
 #include "bisho-pane-oauth.h"
 #include "bisho-pane-flickr.h"
-#include "bisho-facebook-pane.h"
+#include "bisho-pane-facebook.h"
 #include "bisho-pane-username.h"
 
 struct _BishoWindowPrivate {
