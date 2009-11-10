@@ -22,12 +22,11 @@
 #include <gtk/gtk.h>
 #include <gnome-keyring.h>
 #include <libsoup/soup.h>
-#include <rest/facebook-proxy.h>
+#include <rest-extras/facebook-proxy.h>
 #include <rest/rest-xml-parser.h>
 #include "service-info.h"
-#include "bisho-pane.h"
+#include "bisho-pane-facebook.h"
 #include "bisho-utils.h"
-#include "bisho-facebook-pane.h"
 
 /* TODO: use mojito-keyring */
 static const GnomeKeyringPasswordSchema facebook_schema = {
@@ -41,22 +40,22 @@ static const GnomeKeyringPasswordSchema facebook_schema = {
 
 #define FACEBOOK_SERVER "http://facebook.com/"
 
-/* TODO: make this a widget subclass and this private data */
-typedef struct {
+struct _BishoPaneFacebookPrivate {
   ServiceInfo *info;
   RestProxy *proxy;
-  GtkWidget *label;
   GtkWidget *button;
-} WidgetData;
+};
 
 typedef enum {
   LOGGED_OUT,
   WORKING,
-  CONTINUE_AUTH,
   LOGGED_IN,
 } ButtonState;
 
-static void update_widgets (WidgetData *data, ButtonState state, const char *name);
+#define GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), BISHO_TYPE_PANE_FACEBOOK, BishoPaneFacebookPrivate))
+G_DEFINE_TYPE (BishoPaneFacebook, bisho_pane_facebook, BISHO_TYPE_PANE);
+
+static void update_widgets (BishoPaneFacebook *pane, ButtonState state, const char *name);
 
 /* TODO: move to mojito */
 static gboolean
@@ -116,6 +115,7 @@ get_xml (RestProxyCall *call)
   return root;
 }
 
+/* TODO review this function */
 static void
 get_user_name (WidgetData *data, const char *uid)
 {
@@ -146,87 +146,104 @@ get_user_name (WidgetData *data, const char *uid)
   }
 }
 
+/* TODO need review!!! */
 static void
 log_in_clicked (GtkWidget *button, gpointer user_data)
 {
-  WidgetData *data = user_data;
+  BishoPaneFacebook *pane = BISHO_PANE_FACEBOOK (user_data);
+  BishoPaneFacebookPrivate *priv = pane->priv;
   char *url;
+/*
   RestProxyCall *call;
   RestXmlNode *node;
   GError *error = NULL;
-
-  update_widgets (data, WORKING, NULL);
+*/
+  update_widgets (pane, WORKING, NULL);
 
   /* TODO: async */
-  call = rest_proxy_new_call (data->proxy);
+/*
+  call = rest_proxy_new_call (pane->proxy);
   rest_proxy_call_set_function (call, "auth.createToken");
 
   if (!rest_proxy_call_sync (call, &error)) {
     g_message ("Cannot get token: %s", error->message);
     g_error_free (error);
-    update_widgets (data, LOGGED_OUT, NULL);
+    update_widgets (pane, LOGGED_OUT, NULL);
     return;
   }
 
   node = get_xml (call);
 
-  data->info->facebook.token = g_strdup (node->content);
+  pane->info->facebook.token = g_strdup (node->content);
   rest_xml_node_unref (node);
-
-  url = facebook_proxy_build_login_url (FACEBOOK_PROXY (data->proxy), data->info->facebook.token);
+*/
+  url = facebook_proxy_build_login_url (FACEBOOK_PROXY (pane->proxy), pane->info->facebook.token);
   gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (button)), url, GDK_CURRENT_TIME, NULL);
-
-  /* TODO wait for dbus call from callback */
-  update_widgets (data, CONTINUE_AUTH, NULL);
 }
 
 
 static void
 delete_done_cb (GnomeKeyringResult result, gpointer user_data)
 {
-  WidgetData *data = user_data;
+  BishoPaneFacebook *pane = BISHO_PANE_FACEBOOK (user_data);
 
   if (result == GNOME_KEYRING_RESULT_OK)
-    update_widgets (data, LOGGED_OUT, NULL);
+    update_widgets (pane, LOGGED_OUT, NULL);
   else
-    update_widgets (data, LOGGED_IN, NULL);
+    update_widgets (pane, LOGGED_IN, NULL);
 }
 
 static void
 log_out_clicked (GtkButton *button, gpointer user_data)
 {
-  WidgetData *data = user_data;
+  BishoPaneFacebook *pane = BISHO_PANE_FACEBOOK (user_data);
+  BishoPaneFacebookPrivate *priv = pane->priv;
 
   gnome_keyring_delete_password (&facebook_schema, delete_done_cb, user_data, NULL,
                                  "server", FACEBOOK_SERVER,
-                                 "api-key", data->info->facebook.app_id,
+                                 "api-key", priv->info->facebook.app_id,
                                  NULL);
 
-  update_widgets (data, LOGGED_OUT, NULL);
+  update_widgets (pane, LOGGED_OUT, NULL);
 }
 
+/* TODO change to bisho_pane_facebook_continue_auth */
 static void
-continue_clicked (GtkWidget *button, gpointer user_data)
+bisho_pane_facebook_continue_auth (BishoPane *_pane, GHashTable *params)
 {
-  WidgetData *data = user_data;
+  BishoPaneFacebook *pane = BISHO_PANE_FACEBOOK (_pane);
+  BishoPaneFacebookPrivate *priv = pane->priv;
   RestProxyCall *call;
   RestXmlNode *node;
   const char *session_key, *secret, *uid;
   char *password, *permission, *url;
+  GError *error = NULL;
 
-  update_widgets (data, WORKING, NULL);
+  if (params == NULL || g_hash_table_lookup (params, "frob") == NULL) {
+    g_message ("Frob not provided in callback, cannot continue");
+    /* TODO bisho_utils_message (NULL, "Flickr", NULL); */
+    update_widgets (pane, LOGGED_OUT, NULL);
+    return;
+  }
 
-  call = rest_proxy_new_call (data->proxy);
+  update_widgets (pane, WORKING, NULL);
+
+  call = rest_proxy_new_call (pane->proxy);
   rest_proxy_call_set_function (call, "auth.getSession");
-  rest_proxy_call_add_param (call, "auth_token", data->info->facebook.token);
+  rest_proxy_call_add_param (call, "auth_token", pane->info->facebook.token);
 
-  if (!rest_proxy_call_sync (call, NULL))
-    g_message ("Cannot get session");
+  if (!rest_proxy_call_sync (call, NULL)){
+    bisho_pane_set_banner_error (BISHO_PANE (pane), error);
+    g_message ("Cannot get session: %s", error->message);
+    g_error_free (error);
+    update_widgets (pane, LOGGED_OUT, NULL);
+    return;
+  }
 
   node = get_xml (call);
 
   if (node == NULL) {
-    update_widgets (data, LOGGED_OUT, NULL);
+    update_widgets (pane, LOGGED_OUT, NULL);
     return;
   }
 
@@ -235,10 +252,10 @@ continue_clicked (GtkWidget *button, gpointer user_data)
   uid = rest_xml_node_find (node, "uid")->content;
 
   password = bisho_utils_encode_tokens (session_key, secret);
-  facebook_proxy_set_session_key (FACEBOOK_PROXY (data->proxy), session_key);
-  facebook_proxy_set_app_secret (FACEBOOK_PROXY (data->proxy), secret);
+  facebook_proxy_set_session_key (FACEBOOK_PROXY (pane->proxy), session_key);
+  facebook_proxy_set_app_secret (FACEBOOK_PROXY (pane->proxy), secret);
 
-  get_user_name (data, uid);
+  get_user_name (pane, uid);
 
   rest_xml_node_unref (node);
 
@@ -246,14 +263,13 @@ continue_clicked (GtkWidget *button, gpointer user_data)
   GnomeKeyringResult result;
   GnomeKeyringAttributeList *attrs;
   guint32 id;
-
   attrs = gnome_keyring_attribute_list_new ();
   gnome_keyring_attribute_list_append_string (attrs, "server", FACEBOOK_SERVER);
-  gnome_keyring_attribute_list_append_string (attrs, "api-key", data->info->facebook.app_id);
+  gnome_keyring_attribute_list_append_string (attrs, "api-key", pane->info->facebook.app_id);
 
   result = gnome_keyring_item_create_sync (NULL,
                                            GNOME_KEYRING_ITEM_GENERIC_SECRET,
-                                           data->info->display_name,
+                                           pane->info->display_name,
                                            attrs, password,
                                            TRUE, &id);
 
@@ -263,7 +279,7 @@ continue_clicked (GtkWidget *button, gpointer user_data)
                                                  LIBEXECDIR "/mojito-core",
                                                  id, GNOME_KEYRING_ACCESS_READ);
 
-    call = rest_proxy_new_call (data->proxy);
+    call = rest_proxy_new_call (pane->proxy);
 
     rest_proxy_call_set_function (call, "Users.hasAppPermission");
     rest_proxy_call_add_param (call, "ext_perm", "publish_stream");
@@ -279,53 +295,41 @@ continue_clicked (GtkWidget *button, gpointer user_data)
     rest_xml_node_unref (node);
 
     if (g_strcmp0 (permission, "0") == 0) {
-      url = facebook_proxy_build_permission_url (FACEBOOK_PROXY (data->proxy), "publish_stream");
+      url = facebook_proxy_build_permission_url (FACEBOOK_PROXY (pane->proxy), "publish_stream");
       gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (button)), url, GDK_CURRENT_TIME, NULL);
     }
   } else {
-    update_widgets (data, LOGGED_OUT, NULL);
+    update_widgets (pane, LOGGED_OUT, NULL);
   }
 }
 
 static void
-update_widgets (WidgetData *data, ButtonState state, const char *name)
+update_widgets (BishoPaneFacebook *pane, ButtonState state, const char *name)
 {
-  g_signal_handlers_disconnect_by_func (data->button, log_out_clicked, data);
-  g_signal_handlers_disconnect_by_func (data->button, continue_clicked, data);
-  g_signal_handlers_disconnect_by_func (data->button, log_in_clicked, data);
+  BishoPaneFacebookPrivate *priv = pane->priv;
 
-  /* TODO: display user name */
+  g_signal_handlers_disconnect_by_func (pane->button, log_out_clicked, pane);
+  g_signal_handlers_disconnect_by_func (pane->button, log_in_clicked, pane);
 
   switch (state) {
   case LOGGED_OUT:
-    gtk_widget_set_sensitive (data->button, TRUE);
-    gtk_label_set_text (GTK_LABEL (data->label), _("Log in pending"));
-    gtk_button_set_label (GTK_BUTTON (data->button), _("Log me in"));
-    g_signal_connect (data->button, "clicked", G_CALLBACK (log_in_clicked), data);
+    bisho_pane_set_user (BISHO_PANE (pane), NULL, NULL);
+    bisho_pane_set_banner (BISHO_PANE (pane), NULL);
+    gtk_widget_set_sensitive (priv->button, TRUE);
+    gtk_button_set_label (GTK_BUTTON (priv->button), _("Log me in"));
+    g_signal_connect (priv->button, "clicked", G_CALLBACK (log_in_clicked), pane);
     break;
   case WORKING:
-    gtk_widget_set_sensitive (data->button, FALSE);
-    gtk_label_set_text (GTK_LABEL (data->label), _("Log in pending..."));
-    gtk_button_set_label (GTK_BUTTON (data->button), _("Working..."));
-    break;
-  case CONTINUE_AUTH:
-    gtk_widget_set_sensitive (data->button, TRUE);
-    gtk_label_set_text (GTK_LABEL (data->label), _("Press Continue to continue the log in."));
-    gtk_button_set_label (GTK_BUTTON (data->button), _("Continue"));
-    g_signal_connect (data->button, "clicked", G_CALLBACK (continue_clicked), data);
+    bisho_pane_set_banner (BISHO_PANE (pane), NULL);
+    gtk_widget_set_sensitive (priv->button, FALSE);
+    gtk_button_set_label (GTK_BUTTON (priv->button), _("Working..."));
     break;
   case LOGGED_IN:
-    gtk_widget_set_sensitive (data->button, TRUE);
-    if (name) {
-      char *s;
-      s = g_strdup_printf (_("Logged in as %s"), name);
-      gtk_label_set_text (GTK_LABEL (data->label), s);
-      g_free (s);
-    } else {
-      gtk_label_set_text (GTK_LABEL (data->label), _("Logged in"));
-    }
-    gtk_button_set_label (GTK_BUTTON (data->button), _("Log me out"));
-    g_signal_connect (data->button, "clicked", G_CALLBACK (log_out_clicked), data);
+    bisho_pane_set_banner (BISHO_PANE (pane), _("Log in succeeded. You'll see new items in a couple of minutes."));
+    gtk_widget_set_sensitive (priv->button, TRUE);
+    bisho_pane_set_user (BISHO_PANE (pane), NULL, name);
+    gtk_button_set_label (GTK_BUTTON (priv->button), _("Log me out"));
+    g_signal_connect (priv->button, "clicked", G_CALLBACK (log_out_clicked), pane);
     break;
   }
 }
@@ -374,49 +378,66 @@ find_key_cb (GnomeKeyringResult result,
   }
 }
 
-GtkWidget *
-bisho_facebook_pane_new (ServiceInfo *info)
+static void
+bisho_pane_facebook_class_init (BishoPaneFacebookClass *klass)
 {
-  GtkWidget *table, *label;
-  WidgetData *data;
+  BishoPaneClass *pane_class = BISHO_PANE_CLASS (klass);
+
+  pane_class->continue_auth = bisho_pane_facebook_continue_auth;
+
+  g_type_class_add_private (klass, sizeof (BishoPaneFacebookPrivate));
+}
+
+static void
+bisho_pane_facebook_init (BishoPaneFacebook *self)
+{
+  self->priv = GET_PRIVATE (self);
+}
+
+GtkWidget *
+bisho_pane_facebook_new (MojitoClient *client, ServiceInfo *info)
+{
+  BishoPaneFlickr *pane;
+  BishoPaneFlickrPrivate *priv;
+  GtkWidget *content, *align, *box;
 
   g_assert (info);
   g_assert (info->auth == AUTH_FACEBOOK);
   g_assert (info->facebook.app_id);
   g_assert (info->facebook.secret);
 
-  data = g_slice_new0 (WidgetData);
-  data->info = info;
-  data->proxy = facebook_proxy_new (info->facebook.app_id, info->facebook.secret);
-  rest_proxy_set_user_agent (data->proxy, "Bisho/" VERSION);
+  pane = g_object_new (BISHO_TYPE_PANE_FACEBOOK,
+                       "mojito", client,
+                       "service", info,
+                       NULL);
 
-  table = gtk_table_new (2, 2, TRUE);
+  priv = pane->priv;
+  priv->info = info;
 
-  label = gtk_label_new (_("<b>Status:</b>"));
-  gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
-  gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
-  gtk_widget_show (label);
-  gtk_table_attach (GTK_TABLE (table), label, 0, 1, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
+  priv->proxy = facebook_proxy_new (info->facebook.app_id, info->facebook.secret);
+  rest_proxy_set_user_agent (pane->proxy, "Bisho/" VERSION);
 
-  data->label = gtk_label_new ("");
-  gtk_misc_set_alignment (GTK_MISC (data->label), 0.0, 0.5);
-  gtk_widget_show (data->label);
-  gtk_table_attach (GTK_TABLE (table), data->label, 0, 1, 1, 2, GTK_FILL, GTK_FILL, 0, 0);
+  content = BISHO_PANE (pane)->content;
 
-  data->button = gtk_button_new ();
-  gtk_widget_show (data->button);
-  gtk_table_attach (GTK_TABLE (table), data->button, 1, 2, 0, 1, 0, 0, 0, 0);
+  align = gtk_alignment_new (0.5, 0.5, 0.0, 0.0);
+  gtk_widget_show (align);
+  gtk_container_add (GTK_CONTAINER (content), align);
 
-  label = bisho_pane_make_disclaimer_label (info);
-  gtk_widget_show (label);
-  gtk_table_attach (GTK_TABLE (table), label, 1, 2, 1, 2, GTK_FILL, GTK_FILL, 0, 0);
+  box = gtk_hbox_new (FALSE, 8);
+  gtk_widget_show (box);
+  gtk_container_add (GTK_CONTAINER (align), box);
 
-  update_widgets (data, LOGGED_OUT, NULL);
+  priv->button = gtk_button_new ();
+  gtk_widget_show (priv->button);
+  bisho_pane_follow_connected (BISHO_PANE (pane), priv->button);
+  gtk_box_pack_start (GTK_BOX (box), priv->button, FALSE, FALSE, 0);
 
-  gnome_keyring_find_password (&facebook_schema, find_key_cb, data, NULL,
+  update_widgets (pane, LOGGED_OUT, NULL);
+
+  gnome_keyring_find_password (&facebook_schema, find_key_cb, pane, NULL,
                                "server", FACEBOOK_SERVER,
                                "api-key", info->facebook.app_id,
                                NULL);
 
-  return table;
+  return (GtkWidget *)pane;
 }

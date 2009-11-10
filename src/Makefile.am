@@ -7,7 +7,7 @@ bisho_SOURCES = \
 	bisho-pane-flickr.c bisho-pane-flickr.h \
 	bisho-pane-oauth.c bisho-pane-oauth.h \
 	bisho-pane-username.c bisho-pane-username.h \
- 	bisho-facebook-pane.c bisho-facebook-pane.h \
+ 	bisho-pane-facebook.c bisho-pane-facebook.h \
 	bisho-utils.c bisho-utils.h \
 	service-info.c service-info.h \
 	mux-label.c mux-label.h \
