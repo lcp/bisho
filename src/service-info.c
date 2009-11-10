@@ -37,6 +37,8 @@ service_info_authtype_from_string (const char *s)
     return AUTH_OAUTH;
   } else if (g_ascii_strcasecmp (s, "flickr") == 0) {
     return AUTH_FLICKR;
+  } else if (g_ascii_strcasecmp (s, "facebook") == 0) {
+    return AUTH_FACEBOOK;
   } else {
     g_message ("Unknown authentication type '%s'", s);
     return AUTH_INVALID;
@@ -118,6 +120,20 @@ get_info_for_service (const char *name)
         info->flickr.shared_secret = g_strdup (secret);
       } else {
         g_message ("Cannot find keys for %s", info->name);
+        /* Yes, we're leaking.  Live with it */
+        return NULL;
+      }
+    }
+    break;
+  case AUTH_FACEBOOK:
+    {
+      const char *key, *secret;
+
+      if (mojito_keystore_get_key_secret (info->name, &key, &secret)) {
+        info->facebook.app_id = g_strdup (key);
+        info->facebook.secret = g_strdup (secret);
+      } else {
+        g_message ("Cannot find API keys for %s", info->name);
         /* Yes, we're leaking.  Live with it */
         return NULL;
       }

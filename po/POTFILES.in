@@ -1,4 +1,5 @@
 data/bisho.desktop.in
+src/bisho-facebook-pane.c
 src/bisho-pane.c
 src/bisho-pane-flickr.c
 src/bisho-pane-oauth.c

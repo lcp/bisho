@@ -26,6 +26,7 @@
 #include "service-info.h"
 #include "bisho-pane-oauth.h"
 #include "bisho-pane-flickr.h"
+#include "bisho-facebook-pane.h"
 #include "bisho-pane-username.h"
 
 struct _BishoWindowPrivate {
@@ -96,6 +97,15 @@ construct_ui (BishoWindow *window, const char *service_name)
     gtk_widget_show (pane);
     gtk_box_pack_start (GTK_BOX (box), pane, FALSE, FALSE, 0);
     g_hash_table_insert (window->priv->panes, info->name, pane);
+    break;
+  case AUTH_FACEBOOK:
+    {
+      GtkWidget *pane;
+      pane = bisho_facebook_pane_new (info);
+      gtk_widget_show (pane);
+      gtk_box_pack_start (GTK_BOX (box), pane, FALSE, FALSE, 0);
+      //g_hash_table_insert (window->priv->panes, info->name, pane);
+    }
     break;
   case AUTH_INVALID:
     /* Should never see this, so ignore it */
