@@ -117,8 +117,10 @@ get_xml (RestProxyCall *call)
 
 /* TODO review this function */
 static void
-get_user_name (WidgetData *data, const char *uid)
+get_user_name (BishoPaneFacebook *pane, const char *uid)
 {
+  BishoPaneFacebookPrivate *priv = pane->priv;
+
   RestProxyCall *call;
   RestXmlNode *node;
   GError *error = NULL;
@@ -126,7 +128,7 @@ get_user_name (WidgetData *data, const char *uid)
   g_assert (data);
   g_assert (uid);
 
-  call = rest_proxy_new_call (data->proxy);
+  call = rest_proxy_new_call (priv->proxy);
   rest_proxy_call_set_function (call, "users.getInfo");
   rest_proxy_call_add_param (call, "uids", uid);
   rest_proxy_call_add_param (call, "fields", "name");
@@ -177,7 +179,7 @@ log_in_clicked (GtkWidget *button, gpointer user_data)
   pane->info->facebook.token = g_strdup (node->content);
   rest_xml_node_unref (node);
 */
-  url = facebook_proxy_build_login_url (FACEBOOK_PROXY (pane->proxy), pane->info->facebook.token);
+  url = facebook_proxy_build_login_url (FACEBOOK_PROXY (priv->proxy), priv->info->facebook.token);
   gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (button)), url, GDK_CURRENT_TIME, NULL);
 }
 
@@ -228,9 +230,9 @@ bisho_pane_facebook_continue_auth (BishoPane *_pane, GHashTable *params)
 
   update_widgets (pane, WORKING, NULL);
 
-  call = rest_proxy_new_call (pane->proxy);
+  call = rest_proxy_new_call (priv->proxy);
   rest_proxy_call_set_function (call, "auth.getSession");
-  rest_proxy_call_add_param (call, "auth_token", pane->info->facebook.token);
+  rest_proxy_call_add_param (call, "auth_token", priv->info->facebook.token);
 
   if (!rest_proxy_call_sync (call, NULL)){
     bisho_pane_set_banner_error (BISHO_PANE (pane), error);
@@ -252,8 +254,8 @@ bisho_pane_facebook_continue_auth (BishoPane *_pane, GHashTable *params)
   uid = rest_xml_node_find (node, "uid")->content;
 
   password = bisho_utils_encode_tokens (session_key, secret);
-  facebook_proxy_set_session_key (FACEBOOK_PROXY (pane->proxy), session_key);
-  facebook_proxy_set_app_secret (FACEBOOK_PROXY (pane->proxy), secret);
+  facebook_proxy_set_session_key (FACEBOOK_PROXY (priv->proxy), session_key);
+  facebook_proxy_set_app_secret (FACEBOOK_PROXY (priv->proxy), secret);
 
   get_user_name (pane, uid);
 
@@ -308,8 +310,8 @@ update_widgets (BishoPaneFacebook *pane, ButtonState state, const char *name)
 {
   BishoPaneFacebookPrivate *priv = pane->priv;
 
-  g_signal_handlers_disconnect_by_func (pane->button, log_out_clicked, pane);
-  g_signal_handlers_disconnect_by_func (pane->button, log_in_clicked, pane);
+  g_signal_handlers_disconnect_by_func (priv->button, log_out_clicked, pane);
+  g_signal_handlers_disconnect_by_func (priv->button, log_in_clicked, pane);
 
   switch (state) {
   case LOGGED_OUT:
@@ -339,7 +341,8 @@ find_key_cb (GnomeKeyringResult result,
              const char *string,
              gpointer user_data)
 {
-  WidgetData *data = user_data;
+  BishoPaneFacebook *pane = BISHO_PANE_FACEBOOK (user_data);
+  BishoPaneFacebookPrivate *priv = pane->priv;
 
   if (result == GNOME_KEYRING_RESULT_OK) {
     RestProxyCall *call;
@@ -348,10 +351,10 @@ find_key_cb (GnomeKeyringResult result,
     GError *error = NULL;
 
     if (decode (string, &session, &secret)) {
-      facebook_proxy_set_app_secret (FACEBOOK_PROXY (data->proxy), secret);
-      facebook_proxy_set_session_key (FACEBOOK_PROXY (data->proxy), session);
+      facebook_proxy_set_app_secret (FACEBOOK_PROXY (priv->proxy), secret);
+      facebook_proxy_set_session_key (FACEBOOK_PROXY (priv->proxy), session);
 
-      call = rest_proxy_new_call (data->proxy);
+      call = rest_proxy_new_call (priv->proxy);
       rest_proxy_call_set_function (call, "users.getLoggedInUser");
 
       /* TODO async */
@@ -363,15 +366,15 @@ find_key_cb (GnomeKeyringResult result,
 
       node = get_xml (call);
       if (node) {
-        get_user_name (data, node->content);
+        get_user_name (pane, node->content);
         rest_xml_node_unref (node);
       } else {
         /* The token isn't valid so fake a log out */
-        log_out_clicked (NULL, data);
+        log_out_clicked (NULL, pane);
       }
     } else {
       /* The token isn't valid so fake a log out */
-      log_out_clicked (NULL, data);
+      log_out_clicked (NULL, pane);
     }
   } else {
     update_widgets (data, LOGGED_OUT, NULL);
@@ -397,8 +400,8 @@ bisho_pane_facebook_init (BishoPaneFacebook *self)
 GtkWidget *
 bisho_pane_facebook_new (MojitoClient *client, ServiceInfo *info)
 {
-  BishoPaneFlickr *pane;
-  BishoPaneFlickrPrivate *priv;
+  BishoPaneFacebook *pane;
+  BishoPaneFacebookPrivate *priv;
   GtkWidget *content, *align, *box;
 
   g_assert (info);
