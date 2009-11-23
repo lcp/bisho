@@ -27,21 +27,23 @@ G_BEGIN_DECLS
 
 #define BISHO_TYPE_PANE_FACEBOOK (bisho_pane_facebook_get_type())
 #define BISHO_PANE_FACEBOOK(obj)                                          \
-  (G_TYPE_CHECK_INSTANCE_CAST ((obj),                                   \
-                               BISHO_TYPE_PANE_FACEBOOK,                  \
-                               BishoPaneFacebook))
+   (G_TYPE_CHECK_INSTANCE_CAST ((obj),                                    \
+                                BISHO_TYPE_PANE_FACEBOOK,                 \
+                                BishoPaneFacebook))
 #define BISHO_PANE_FACEBOOK_CLASS(klass)                                  \
-  (G_TYPE_CHECK_CLASS_CAST ((klass),                                    \
-                            BISHO_TYPE_PANE_FACEBOOK,                     \
-                            BishoPaneFacebookClass))
-#define BISHO_IS_PANE_FACEBOOK(obj)                               \
-  (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BISHO_TYPE_PANE_FACEBOOK))
-#define BISHO_IS_PANE_FACEBOOK_CLASS(klass)                       \
-  (G_TYPE_CHECK_CLASS_TYPE ((klass), BISHO_TYPE_PANE_FACEBOOK))
+   (G_TYPE_CHECK_CLASS_CAST ((klass),                                     \
+                             BISHO_TYPE_PANE_FACEBOOK,                    \
+                             BishoPaneFacebookClass))
+#define BISHO_IS_PANE_FACEBOOK(obj)                                       \
+   (G_TYPE_CHECK_INSTANCE_TYPE ((obj),                                    \
+                                BISHO_TYPE_PANE_FACEBOOK))
+#define BISHO_IS_PANE_FACEBOOK_CLASS(klass)                               \
+   (G_TYPE_CHECK_CLASS_TYPE ((klass),                                     \
+                             BISHO_TYPE_PANE_FACEBOOK))
 #define BISHO_PANE_FACEBOOK_GET_CLASS(obj)                                \
-  (G_TYPE_INSTANCE_GET_CLASS ((obj),                                    \
-                              BISHO_TYPE_PANE_FACEBOOK,                   \
-                              BishoPaneFacebookClass))
+   (G_TYPE_INSTANCE_GET_CLASS ((obj),                                     \
+                               BISHO_TYPE_PANE_FACEBOOK,                  \
+                               BishoPaneFacebookClass))
 
 typedef struct _BishoPaneFacebookPrivate BishoPaneFacebookPrivate;
 typedef struct _BishoPaneFacebook        BishoPaneFacebook;

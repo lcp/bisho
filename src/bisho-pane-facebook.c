@@ -49,6 +49,7 @@ struct _BishoPaneFacebookPrivate {
 typedef enum {
   LOGGED_OUT,
   WORKING,
+  CONTINUE_AUTH,
   LOGGED_IN,
 } ButtonState;
 
@@ -180,6 +181,8 @@ log_in_clicked (GtkWidget *button, gpointer user_data)
 
   url = facebook_proxy_build_login_url (FACEBOOK_PROXY (priv->proxy), priv->info->facebook.token);
   gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (button)), url, GDK_CURRENT_TIME, NULL);
+
+  update_widgets (pane, CONTINUE_AUTH, NULL);
 }
 
 
@@ -208,7 +211,6 @@ log_out_clicked (GtkButton *button, gpointer user_data)
   update_widgets (pane, LOGGED_OUT, NULL);
 }
 
-/* TODO change to bisho_pane_facebook_continue_auth */
 static void
 bisho_pane_facebook_continue_auth (BishoPane *_pane, GHashTable *params)
 {
@@ -219,13 +221,6 @@ bisho_pane_facebook_continue_auth (BishoPane *_pane, GHashTable *params)
   const char *session_key, *secret, *uid;
   char *password, *permission, *url;
   GError *error = NULL;
-
-  if (params == NULL || g_hash_table_lookup (params, "frob") == NULL) {
-    g_message ("Frob not provided in callback, cannot continue");
-    /* TODO bisho_utils_message (NULL, "Flickr", NULL); */
-    update_widgets (pane, LOGGED_OUT, NULL);
-    return;
-  }
 
   update_widgets (pane, WORKING, NULL);
 
@@ -305,6 +300,13 @@ bisho_pane_facebook_continue_auth (BishoPane *_pane, GHashTable *params)
 }
 
 static void
+continue_clicked (GtkWidget *button, gpointer user_data)
+{
+  bisho_pane_facebook_continue_auth (BISHO_PANE (user_data), NULL);
+}
+
+
+static void
 update_widgets (BishoPaneFacebook *pane, ButtonState state, const char *name)
 {
   BishoPaneFacebookPrivate *priv = pane->priv;
@@ -324,6 +326,14 @@ update_widgets (BishoPaneFacebook *pane, ButtonState state, const char *name)
     bisho_pane_set_banner (BISHO_PANE (pane), NULL);
     gtk_widget_set_sensitive (priv->button, FALSE);
     gtk_button_set_label (GTK_BUTTON (priv->button), _("Working..."));
+    break;
+  case CONTINUE_AUTH:
+    gtk_widget_set_sensitive (priv->button, TRUE);
+
+    bisho_pane_set_banner (BISHO_PANE (pane), _("Once you have logged in to Facebook, press Continue."));
+
+    gtk_button_set_label (GTK_BUTTON (priv->button), _("Continue"));
+    g_signal_connect (priv->button, "clicked", G_CALLBACK (continue_clicked), pane);
     break;
   case LOGGED_IN:
     bisho_pane_set_banner (BISHO_PANE (pane), _("Log in succeeded. You'll see new items in a couple of minutes."));
