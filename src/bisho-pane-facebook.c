@@ -348,9 +348,14 @@ update_widgets (BishoPaneFacebook *pane, ButtonState state, const char *name)
     gtk_button_set_label (GTK_BUTTON (button), _("Working..."));
     break;
   case CONTINUE_AUTH:
+    char *str;
     gtk_widget_show (button);
 
-    bisho_pane_set_banner (BISHO_PANE (pane), _("Once you have logged in to Facebook, press Continue."));
+    /* Use the same string in bisho-pane-oauth.c for translations. */
+    str = g_strdup_printf (_("Once you have logged in to %s, press Continue."), "Facebook");
+
+    bisho_pane_set_banner (BISHO_PANE (pane), str);
+    g_free (str);
 
     gtk_button_set_label (GTK_BUTTON (button), _("Continue"));
     g_signal_connect (button, "clicked", G_CALLBACK (continue_clicked), pane);
