@@ -329,6 +329,7 @@ update_widgets (BishoPaneFacebook *pane, ButtonState state, const char *name)
 {
   BishoPaneFacebookPrivate *priv = pane->priv;
   GtkWidget *button = priv->button;
+  char *str;
 
   g_signal_handlers_disconnect_by_func (button, log_out_clicked, pane);
   g_signal_handlers_disconnect_by_func (button, continue_clicked, pane);
@@ -348,7 +349,6 @@ update_widgets (BishoPaneFacebook *pane, ButtonState state, const char *name)
     gtk_button_set_label (GTK_BUTTON (button), _("Working..."));
     break;
   case CONTINUE_AUTH:
-    char *str;
     gtk_widget_show (button);
 
     /* Use the same string in bisho-pane-oauth.c for translations. */
