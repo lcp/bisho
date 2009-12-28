@@ -227,19 +227,22 @@ got_token_cb (RestProxyCall *call,
   gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (pane)), url, GDK_CURRENT_TIME, NULL);
 */
   url = facebook_proxy_build_fbconnect_login_url (FACEBOOK_PROXY (priv->proxy));
-
   bisho_webkit_open_url (priv->browser_info, url);
 
   update_widgets (pane, CONTINUE_AUTH, NULL);
 }
 
-/* TODO need review!!! */
 static void
 log_in_clicked (GtkWidget *button, gpointer user_data)
 {
   BishoPaneFacebook *pane = BISHO_PANE_FACEBOOK (user_data);
   BishoPaneFacebookPrivate *priv = pane->priv;
+  char *url;
 
+  url = facebook_proxy_build_fbconnect_login_url (FACEBOOK_PROXY (priv->proxy));
+  bisho_webkit_open_url (priv->browser_info, url);
+  update_widgets (pane, WORKING, NULL);
+/*
   RestProxyCall *call;
   GError *error = NULL;
 
@@ -254,6 +257,7 @@ log_in_clicked (GtkWidget *button, gpointer user_data)
     g_message ("Cannot get token: %s", error->message);
     g_error_free (error);
   }
+*/
 }
 
 static void
@@ -383,6 +387,9 @@ session_handler (gpointer data)
   char **split_str = g_strsplit (info->session_url, "?", 2);
   const char *session_key, *secret, *uid;
   char *password;
+
+  g_return_if_fail (split_str[1] != NULL);
+
   form = soup_form_decode (split_str[1]);
 
   session = session_parse (g_hash_table_lookup (form, "session"));
@@ -418,7 +425,6 @@ session_handler (gpointer data)
   } else {
     update_widgets (pane, LOGGED_OUT, NULL);
   }
-
 }
 
 static void
