@@ -22,11 +22,13 @@
 #include <gtk/gtk.h>
 #include <gnome-keyring.h>
 #include <libsoup/soup.h>
+#include <string.h>
 #include <rest-extras/facebook-proxy.h>
 #include <rest/rest-xml-parser.h>
 #include "service-info.h"
 #include "bisho-pane-facebook.h"
 #include "bisho-utils.h"
+#include "bisho-webkit.h"
 
 /* TODO: use mojito-keyring */
 static const GnomeKeyringPasswordSchema facebook_schema = {
@@ -44,6 +46,7 @@ struct _BishoPaneFacebookPrivate {
   ServiceInfo *info;
   RestProxy *proxy;
   GtkWidget *button;
+  BrowserInfo *browser_info;
 };
 
 typedef enum {
@@ -81,6 +84,49 @@ decode (const char *string, char **token, char **token_secret)
   g_strfreev (encoded_keys);
 
   return ret;
+}
+
+/* A parser to extract keys and values from the JSON style session */
+static GHashTable*
+session_parse (const char *session)
+{
+  GHashTable* hashTable = g_hash_table_new(g_str_hash, g_str_equal);
+  char *input = g_strdup (session);
+  char **split_input, **session_vals, *key, *value;
+  int last, i;
+
+  if (input[0] == '{')
+    input[0] = ' ';
+  last = strlen(input)-1;
+  if (input[last] == '}')
+    input[last] = ' ';
+  g_strstrip (input);
+
+  /* Split the string by ," */
+  split_input = g_strsplit (input, ",\"", 0);
+  for (i = 0; split_input[i] != NULL; i++){
+    /* Seperate key and value from "key:value" */
+    session_vals = g_strsplit (split_input[i], ":", 2);
+    if (session_vals[0] != NULL && session_vals[1] != NULL){
+      /* Remove " from the head and the tail */
+      g_strdelimit (session_vals[0], "\"", ' ');
+      g_strstrip (session_vals[0]);
+      g_strdelimit (session_vals[1], "\"", ' ');
+      g_strstrip (session_vals[1]);
+      key = g_strdup (session_vals[0]);
+      value = g_strdup (session_vals[1]);
+
+      /* Insert into the Hashtable */
+      g_hash_table_insert (hashTable, key, value);
+
+      /* free the strings */
+      g_strfreev (session_vals);
+    }
+  }
+  /* free the strings */
+  g_strfreev (split_input);
+
+  return hashTable;
 }
 
 static RestXmlNode *
@@ -176,9 +222,13 @@ got_token_cb (RestProxyCall *call,
 
   priv->info->facebook.token = g_strdup (node->content);
   rest_xml_node_unref (node);
-
+/*
   url = facebook_proxy_build_login_url (FACEBOOK_PROXY (priv->proxy), priv->info->facebook.token);
   gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (pane)), url, GDK_CURRENT_TIME, NULL);
+*/
+  url = facebook_proxy_build_fbconnect_login_url (FACEBOOK_PROXY (priv->proxy));
+
+  bisho_webkit_open_url (priv->browser_info, url);
 
   update_widgets (pane, CONTINUE_AUTH, NULL);
 }
@@ -205,7 +255,6 @@ log_in_clicked (GtkWidget *button, gpointer user_data)
     g_error_free (error);
   }
 }
-
 
 static void
 delete_done_cb (GnomeKeyringResult result, gpointer user_data)
@@ -325,10 +374,59 @@ continue_clicked (GtkWidget *button, gpointer user_data)
 }
 
 static void
+session_handler (gpointer data)
+{
+  BrowserInfo *info = (BrowserInfo *)data;
+  BishoPaneFacebook *pane = BISHO_PANE_FACEBOOK (info->pane);
+  BishoPaneFacebookPrivate *priv = pane->priv;
+  GHashTable *form, *session;
+  char **split_str = g_strsplit (info->session_url, "?", 2);
+  const char *session_key, *secret, *uid;
+  char *password;
+  form = soup_form_decode (split_str[1]);
+
+  session = session_parse (g_hash_table_lookup (form, "session"));
+
+  session_key = g_hash_table_lookup (session, "session_key");
+  secret = g_hash_table_lookup (session, "secret");
+  uid = g_hash_table_lookup (session, "uid");
+
+  password = bisho_utils_encode_tokens (session_key, secret);
+  facebook_proxy_set_session_key (FACEBOOK_PROXY (priv->proxy), session_key);
+  facebook_proxy_set_app_secret (FACEBOOK_PROXY (priv->proxy), secret);
+
+  get_user_name (pane, uid);
+
+  GnomeKeyringResult result;
+  GnomeKeyringAttributeList *attrs;
+  guint32 id;
+  attrs = gnome_keyring_attribute_list_new ();
+  gnome_keyring_attribute_list_append_string (attrs, "server", FACEBOOK_SERVER);
+  gnome_keyring_attribute_list_append_string (attrs, "api-key", priv->info->facebook.app_id);
+
+  result = gnome_keyring_item_create_sync (NULL,
+                                           GNOME_KEYRING_ITEM_GENERIC_SECRET,
+                                           priv->info->display_name,
+                                           attrs, password,
+                                           TRUE, &id);
+
+  if (result == GNOME_KEYRING_RESULT_OK) {
+    gnome_keyring_item_grant_access_rights_sync (NULL,
+                                                 "mojito",
+                                                 LIBEXECDIR "/mojito-core",
+                                                 id, GNOME_KEYRING_ACCESS_READ);
+  } else {
+    update_widgets (pane, LOGGED_OUT, NULL);
+  }
+
+}
+
+static void
 update_widgets (BishoPaneFacebook *pane, ButtonState state, const char *name)
 {
   BishoPaneFacebookPrivate *priv = pane->priv;
   GtkWidget *button = priv->button;
+  char *str;
 
   g_signal_handlers_disconnect_by_func (button, log_out_clicked, pane);
   g_signal_handlers_disconnect_by_func (button, continue_clicked, pane);
@@ -348,7 +446,6 @@ update_widgets (BishoPaneFacebook *pane, ButtonState state, const char *name)
     gtk_button_set_label (GTK_BUTTON (button), _("Working..."));
     break;
   case CONTINUE_AUTH:
-    char *str;
     gtk_widget_show (button);
 
     /* Use the same string in bisho-pane-oauth.c for translations. */
@@ -475,6 +572,12 @@ bisho_pane_facebook_new (MojitoClient *client, ServiceInfo *info)
                                "server", FACEBOOK_SERVER,
                                "api-key", info->facebook.app_id,
                                NULL);
+
+  priv->browser_info = g_new0 (BrowserInfo, 1);
+  browser_info_init (priv->browser_info);
+  priv->browser_info->pane = pane;
+  priv->browser_info->stop_url = "http://www.facebook.com/?session=";
+  priv->browser_info->session_handler = session_handler;
 
   return (GtkWidget *)pane;
 }
