@@ -222,12 +222,8 @@ got_token_cb (RestProxyCall *call,
 
   priv->info->facebook.token = g_strdup (node->content);
   rest_xml_node_unref (node);
-/*
   url = facebook_proxy_build_login_url (FACEBOOK_PROXY (priv->proxy), priv->info->facebook.token);
   gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (pane)), url, GDK_CURRENT_TIME, NULL);
-*/
-  url = facebook_proxy_build_fbconnect_login_url (FACEBOOK_PROXY (priv->proxy));
-  bisho_webkit_open_url (priv->browser_info, url);
 
   update_widgets (pane, CONTINUE_AUTH, NULL);
 }
@@ -239,7 +235,8 @@ log_in_clicked (GtkWidget *button, gpointer user_data)
   BishoPaneFacebookPrivate *priv = pane->priv;
   char *url;
 
-  url = facebook_proxy_build_fbconnect_login_url (FACEBOOK_PROXY (priv->proxy));
+  url = facebook_proxy_build_fbconnect_login_url (FACEBOOK_PROXY (priv->proxy), 
+                                                  "read_stream,publish_stream,offline_access");
   bisho_webkit_open_url (priv->browser_info, url);
   update_widgets (pane, WORKING, NULL);
 /*
