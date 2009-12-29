@@ -69,6 +69,7 @@ create_window (GdkScreen *screen)
   gtk_window_set_default_size (GTK_WINDOW (window), 1024, 500);
   gtk_widget_set_name (window, "AuthBrowser");
   gtk_window_set_screen (window, screen);
+  /* Set modal so the browser window will show in the same zone of the main window */
   gtk_window_set_modal (window, TRUE);
 
   return window;
