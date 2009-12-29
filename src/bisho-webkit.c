@@ -1,17 +1,5 @@
 #include "bisho-webkit.h"
 
-/* Initialize BrowserInfo */
-void
-browser_info_init (BrowserInfo *info)
-{
-    info->main_window = NULL;
-    info->web_view = NULL;
-    info->main_title = NULL;
-    info->load_progress = 0;
-    info->stop_url = NULL;
-    info->session_handler = NULL;
-}
-
 static void
 update_title (GtkWindow* window, BrowserInfo *info)
 {

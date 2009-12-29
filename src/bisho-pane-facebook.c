@@ -430,7 +430,6 @@ bisho_pane_facebook_new (MojitoClient *client, ServiceInfo *info)
                                NULL);
 
   priv->browser_info = g_new0 (BrowserInfo, 1);
-  browser_info_init (priv->browser_info);
   priv->browser_info->pane = pane;
   priv->browser_info->stop_url = FACEBOOK_STOP;
   priv->browser_info->session_handler = session_handler;
