@@ -205,7 +205,7 @@ log_in_clicked (GtkWidget *button, gpointer user_data)
 
   url = facebook_proxy_build_fbconnect_login_url (FACEBOOK_PROXY (priv->proxy), 
                                                   "read_stream,publish_stream,offline_access");
-  bisho_webkit_open_url (priv->browser_info, url);
+  bisho_webkit_open_url (gtk_widget_get_screen (GTK_WIDGET (button)), priv->browser_info, url);
   update_widgets (pane, WORKING, NULL);
 }
 
@@ -307,18 +307,20 @@ update_widgets (BishoPaneFacebook *pane, ButtonState state, const char *name)
     gtk_widget_show (button);
     bisho_pane_set_user (BISHO_PANE (pane), NULL, NULL);
     bisho_pane_set_banner (BISHO_PANE (pane), NULL);
+    gtk_widget_set_sensitive (GTK_BUTTON (button), TRUE);
     gtk_button_set_label (GTK_BUTTON (button), _("Log me in"));
     g_signal_connect (button, "clicked", G_CALLBACK (log_in_clicked), pane);
     break;
   case WORKING:
     bisho_pane_set_banner (BISHO_PANE (pane), NULL);
-    gtk_widget_hide (button);
+    gtk_widget_set_sensitive (GTK_BUTTON (button), FALSE);
     gtk_button_set_label (GTK_BUTTON (button), _("Working..."));
     break;
   case LOGGED_IN:
     gtk_widget_show (button);
     bisho_pane_set_banner (BISHO_PANE (pane), _("Log in succeeded. You'll see new items in a couple of minutes."));
     bisho_pane_set_user (BISHO_PANE (pane), NULL, name);
+    gtk_widget_set_sensitive (GTK_BUTTON (button), TRUE);
     gtk_button_set_label (GTK_BUTTON (button), _("Log me out"));
     g_signal_connect (button, "clicked", G_CALLBACK (log_out_clicked), pane);
     break;

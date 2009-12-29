@@ -18,7 +18,7 @@ typedef struct {
   void (*session_handler)(gpointer);
 } BrowserInfo;
 
-void bisho_webkit_open_url (BrowserInfo *info, const char* url);
+void bisho_webkit_open_url (GdkScreen *screen, BrowserInfo *info, const char* url);
 
 G_BEGIN_DECLS
 
