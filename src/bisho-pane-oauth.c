@@ -375,11 +375,7 @@ bisho_pane_oauth_init (BishoPaneOauth *pane)
 
   priv = pane->priv;
 
-  /* Setup browser_info */
   priv->browser_info = g_new0 (BrowserInfo, 1);
-  priv->browser_info->pane = pane;
-  priv->browser_info->stop_url = info->callback;
-  priv->browser_info->session_handler = session_handler;
 
   content = BISHO_PANE (pane)->content;
 
@@ -410,6 +406,11 @@ bisho_pane_oauth_constructed (GObject *object)
   ServiceInfo *info = BISHO_PANE (pane)->info;
 
   bisho_pane_follow_connected (BISHO_PANE (pane), priv->button);
+
+  /* Setup browser_info */
+  priv->browser_info->pane = pane;
+  priv->browser_info->stop_url = info->oauth.callback;
+  priv->browser_info->session_handler = session_handler;
 
   priv->proxy = oauth_proxy_new (info->oauth.consumer_key,
                                 info->oauth.consumer_secret,
