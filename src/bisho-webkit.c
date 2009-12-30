@@ -36,6 +36,7 @@ load_commit_cb (WebKitWebView* page, WebKitWebFrame* frame, gpointer data)
   const gchar* uri = webkit_web_frame_get_uri(frame);
 
   if (g_strrstr (uri, info->stop_url)){
+    webkit_web_view_stop_loading (page);
     gtk_widget_hide (GTK_WIDGET (info->main_window));
     if (info->session_handler != NULL){
         info->session_url = uri;
