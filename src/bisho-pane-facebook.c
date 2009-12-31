@@ -206,7 +206,7 @@ log_in_clicked (GtkWidget *button, gpointer user_data)
   url = facebook_proxy_build_fbconnect_login_url (FACEBOOK_PROXY (priv->proxy), 
                                                   "read_stream,publish_stream,offline_access");
   bisho_webkit_open_url (gtk_widget_get_screen (GTK_WIDGET (button)), priv->browser_info, url);
-  update_widgets (pane, WORKING, NULL);
+  update_widgets (pane, CONTINUE_AUTH, NULL);
 }
 
 static void
@@ -232,6 +232,13 @@ log_out_clicked (GtkButton *button, gpointer user_data)
                                  "server", FACEBOOK_SERVER,
                                  "api-key", priv->info->facebook.app_id,
                                  NULL);
+}
+
+static void
+continue_clicked (GtkButton *button, gpointer data)
+{
+  BishoPaneFacebook *pane = BISHO_PANE_FACEBOOK (data);
+  update_widgets (pane, LOGGED_OUT, NULL);
 }
 
 static void
@@ -300,6 +307,7 @@ update_widgets (BishoPaneFacebook *pane, ButtonState state, const char *name)
   char *str;
 
   g_signal_handlers_disconnect_by_func (button, log_out_clicked, pane);
+  g_signal_handlers_disconnect_by_func (button, continue_clicked, pane);
   g_signal_handlers_disconnect_by_func (button, log_in_clicked, pane);
 
   switch (state) {
