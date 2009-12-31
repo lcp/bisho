@@ -168,6 +168,8 @@ static void
 get_user_name (BishoPaneFacebook *pane, const char *uid)
 {
   BishoPaneFacebookPrivate *priv = pane->priv;
+  MojitoClientService *service;
+  BishoPane *generic_pane = BISHO_PANE (pane);
 
   RestProxyCall *call;
   RestXmlNode *node;
@@ -191,6 +193,8 @@ get_user_name (BishoPaneFacebook *pane, const char *uid)
   if (node) {
     update_widgets (pane, LOGGED_IN, rest_xml_node_find (node, "name")->content);
     rest_xml_node_unref (node);
+    service = mojito_client_get_service (generic_pane->mojito, generic_pane->info->name);
+    mojito_client_service_credentials_updated (service);
   } else {
     update_widgets (pane, LOGGED_OUT, NULL);
   }
@@ -213,11 +217,16 @@ static void
 delete_done_cb (GnomeKeyringResult result, gpointer user_data)
 {
   BishoPaneFacebook *pane = BISHO_PANE_FACEBOOK (user_data);
+  MojitoClientService *service;
+  BishoPane *generic_pane = BISHO_PANE (pane);
 
-  if (result == GNOME_KEYRING_RESULT_OK)
+  if (result == GNOME_KEYRING_RESULT_OK){
     update_widgets (pane, LOGGED_OUT, NULL);
-  else
+    service = mojito_client_get_service (generic_pane->mojito, generic_pane->info->name);
+    mojito_client_service_credentials_updated (service);
+  } else {
     update_widgets (pane, LOGGED_IN, NULL);
+  }
 }
 
 static void
