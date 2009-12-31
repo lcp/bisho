@@ -151,6 +151,7 @@ bisho_window_init (BishoWindow *self)
   gtk_window_set_default_size (GTK_WINDOW (self),
                                gdk_screen_get_width (screen),
                                gdk_screen_get_height (screen));
+  gtk_window_maximize (GTK_WINDOW (self));
 
   box = gtk_vbox_new (FALSE, 0);
   gtk_widget_show (box);
