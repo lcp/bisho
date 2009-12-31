@@ -326,6 +326,7 @@ update_widgets (BishoPaneFacebook *pane, ButtonState state, const char *name)
     break;
   case CONTINUE_AUTH:
     gtk_widget_show (button);
+    gtk_widget_set_sensitive (GTK_BUTTON (button), TRUE);
 
     /* Use the same string in bisho-pane-oauth.c for translations. */
     str = g_strdup_printf (_("Once you have logged in to %s, press Continue."), "Facebook");
