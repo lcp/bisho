@@ -9,6 +9,7 @@ bisho_SOURCES = \
 	bisho-pane-username.c bisho-pane-username.h \
  	bisho-pane-facebook.c bisho-pane-facebook.h \
 	bisho-utils.c bisho-utils.h \
+	bisho-webkit.c bisho-webkit.h \
 	service-info.c service-info.h \
 	mux-label.c mux-label.h \
 	mux-expander.c mux-expander.h \
