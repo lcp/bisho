@@ -27,6 +27,7 @@
 #include "service-info.h"
 #include "bisho-pane-flickr.h"
 #include "bisho-utils.h"
+#include "bisho-webkit.h"
 
 /* TODO: use mojito-keyring */
 static const GnomeKeyringPasswordSchema flickr_schema = {
@@ -44,6 +45,7 @@ struct _BishoPaneFlickrPrivate {
   ServiceInfo *info;
   RestProxy *proxy;
   GtkWidget *button;
+  BrowserInfo *browser_info;
 };
 
 typedef enum {
@@ -129,7 +131,7 @@ log_in_clicked (GtkWidget *button, gpointer user_data)
   rest_xml_node_unref (node);
 
   url = flickr_proxy_build_login_url (FLICKR_PROXY (priv->proxy), priv->info->flickr.frob);
-  gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (button)), url, GDK_CURRENT_TIME, NULL);
+  bisho_webkit_open_url (gtk_widget_get_screen (GTK_WIDGET (button)), priv->browser_info, url);
 
   /* TODO wait for dbus call from callback */
   update_widgets (pane, CONTINUE_AUTH, NULL);
@@ -184,13 +186,6 @@ continue_clicked (GtkWidget *button, gpointer user_data)
   RestXmlNode *node;
   const char *token;
   GError *error = NULL;
-
-//  if (params == NULL || g_hash_table_lookup (params, "frob") == NULL) {
-//    g_message ("Frob not provided in callback, cannot continue");
-    /* TODO bisho_utils_message (NULL, "Flickr", NULL); */
-//    update_widgets (pane, LOGGED_OUT, NULL);
-//    return;
-//  }
 
   update_widgets (pane, WORKING, NULL);
 
@@ -367,6 +362,9 @@ bisho_pane_flickr_new (MojitoClient *client, ServiceInfo *info)
 
   priv->proxy = flickr_proxy_new (info->flickr.api_key, info->flickr.shared_secret);
   rest_proxy_set_user_agent (priv->proxy, "Bisho/" VERSION);
+
+  priv->browser_info = g_new0 (BrowserInfo, 1);
+  priv->browser_info->pane = pane;
 
   content = BISHO_PANE (pane)->content;
 
