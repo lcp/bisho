@@ -142,11 +142,16 @@ static void
 delete_done_cb (GnomeKeyringResult result, gpointer user_data)
 {
   BishoPaneFlickr *pane = BISHO_PANE_FLICKR (user_data);
+  MojitoClientService *service;
+  BishoPane *generic_pane = BISHO_PANE (pane);
 
-  if (result == GNOME_KEYRING_RESULT_OK)
+  if (result == GNOME_KEYRING_RESULT_OK){
     update_widgets (pane, LOGGED_OUT, NULL);
-  else
+    service = mojito_client_get_service (generic_pane->mojito, generic_pane->info->name);
+    mojito_client_service_credentials_updated (service);
+  } else {
     update_widgets (pane, LOGGED_IN, NULL);
+  }
 }
 
 static void
@@ -168,6 +173,8 @@ got_auth (RestXmlNode *node, BishoPaneFlickr *pane)
 {
   RestXmlNode *user;
   const char *name;
+  MojitoClientService *service;
+  BishoPane *generic_pane = BISHO_PANE (pane);
 
   user = rest_xml_node_find (node, "user");
   name = rest_xml_node_get_attr (user, "fullname");
@@ -175,6 +182,8 @@ got_auth (RestXmlNode *node, BishoPaneFlickr *pane)
     name = rest_xml_node_get_attr (user, "username");
 
   update_widgets (pane, LOGGED_IN, name);
+  service = mojito_client_get_service (generic_pane->mojito, generic_pane->info->name);
+  mojito_client_service_credentials_updated (service);
 }
 
 static void
