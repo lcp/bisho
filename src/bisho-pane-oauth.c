@@ -156,11 +156,16 @@ static void
 delete_done_cb (GnomeKeyringResult result, gpointer user_data)
 {
   BishoPaneOauth *pane = BISHO_PANE_OAUTH (user_data);
+  MojitoClientService *service;
+  BishoPane *generic_pane = BISHO_PANE (pane);
 
-  if (result == GNOME_KEYRING_RESULT_OK)
+  if (result == GNOME_KEYRING_RESULT_OK){
     update_widgets (pane, LOGGED_OUT);
-  else
+    service = mojito_client_get_service (generic_pane->mojito, generic_pane->info->name);
+    mojito_client_service_credentials_updated (service);
+  } else {
     update_widgets (pane, LOGGED_IN);
+  }
 }
 
 static void
@@ -186,6 +191,8 @@ access_token_cb (OAuthProxy   *proxy,
   BishoPaneOauth *pane = BISHO_PANE_OAUTH (user_data);
   ServiceInfo *info = BISHO_PANE (pane)->info;
   BishoPaneOauthPrivate *priv = pane->priv;
+  MojitoClientService *service;
+  BishoPane *generic_pane = BISHO_PANE (pane);
   char *encoded;
 
   if (error) {
@@ -219,6 +226,8 @@ access_token_cb (OAuthProxy   *proxy,
                                                  LIBEXECDIR "/mojito-core",
                                                  id, GNOME_KEYRING_ACCESS_READ);
     update_widgets (pane, LOGGED_IN);
+    service = mojito_client_get_service (generic_pane->mojito, info->name);
+    mojito_client_service_credentials_updated (service);
   } else {
     g_message ("Cannot update keyring: %s", gnome_keyring_result_to_message (result));
     update_widgets (pane, LOGGED_OUT);
