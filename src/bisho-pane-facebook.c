@@ -121,8 +121,6 @@ static void
 get_user_name (BishoPaneFacebook *pane, const char *uid)
 {
   BishoPaneFacebookPrivate *priv = pane->priv;
-  MojitoClientService *service;
-  BishoPane *generic_pane = BISHO_PANE (pane);
 
   RestProxyCall *call;
   RestXmlNode *node;
@@ -146,8 +144,6 @@ get_user_name (BishoPaneFacebook *pane, const char *uid)
   if (node) {
     update_widgets (pane, LOGGED_IN, rest_xml_node_find (node, "name")->content);
     rest_xml_node_unref (node);
-    service = mojito_client_get_service (generic_pane->mojito, generic_pane->info->name);
-    mojito_client_service_credentials_updated (service);
   } else {
     update_widgets (pane, LOGGED_OUT, NULL);
   }
@@ -246,6 +242,8 @@ bisho_pane_facebook_continue_auth (BishoPane *_pane, GHashTable *params)
 {
   BishoPaneFacebook *pane = BISHO_PANE_FACEBOOK (_pane);
   BishoPaneFacebookPrivate *priv = pane->priv;
+  MojitoClientService *service;
+  BishoPane *generic_pane = BISHO_PANE (pane);
   RestProxyCall *call;
   RestXmlNode *node;
   const char *session_key, *secret, *uid;
@@ -302,6 +300,9 @@ bisho_pane_facebook_continue_auth (BishoPane *_pane, GHashTable *params)
                                                  "mojito",
                                                  LIBEXECDIR "/mojito-core",
                                                  id, GNOME_KEYRING_ACCESS_READ);
+
+    service = mojito_client_get_service (generic_pane->mojito, generic_pane->info->name);
+    mojito_client_service_credentials_updated (service);
 
     call = rest_proxy_new_call (priv->proxy);
 
