@@ -38,7 +38,7 @@ PKG_CHECK_MODULES(DEPS, gmodule-export-2.0
                         rest-extras-0.6
                         unique-1.0
                         mx-gtk-1.0
-			webkit-1.0)
+                        webkit-1.0)
 
 AM_GCONF_SOURCE_2
 
