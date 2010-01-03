@@ -27,6 +27,7 @@
 #include "service-info.h"
 #include "bisho-module.h"
 #include "bisho-utils.h"
+#include "bisho-webkit.h"
 #include "oauth.h"
 
 /* TODO: use mojito-keyring */
@@ -53,6 +54,7 @@ struct _BishoPaneOauthPrivate {
   GtkWidget *pin_label;
   GtkWidget *pin_entry;
   GtkWidget *button;
+  BrowserInfo *browser_info;
 };
 
 typedef enum {
@@ -117,7 +119,7 @@ request_token_cb (OAuthProxy   *proxy,
   }
 
   url = create_url (pane, oauth_proxy_get_token (OAUTH_PROXY (priv->proxy)));
-  gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (pane)), url, GDK_CURRENT_TIME, NULL);
+  bisho_webkit_open_url (gtk_widget_get_screen (GTK_WIDGET (pane)), priv->browser_info, url);
 
   if (priv->callback == NULL) {
     update_widgets (pane, CONTINUE_AUTH_10);
@@ -287,6 +289,13 @@ continue_clicked (GtkWidget *button, gpointer user_data)
 }
 
 static void
+session_handler (gpointer data)
+{
+  BrowserInfo *browser_info = (BrowserInfo *)data;
+  bisho_pane_oauth_continue_auth (browser_info->pane, NULL);
+}
+
+static void
 update_widgets (BishoPaneOauth *pane, ButtonState state)
 {
   BishoPaneOauthPrivate *priv;
@@ -386,6 +395,11 @@ bisho_pane_oauth_constructed (GObject *object)
 
   bisho_pane_follow_connected (BISHO_PANE (pane), priv->button);
 
+  /* Setup browser_info */
+  priv->browser_info->pane = pane;
+  priv->browser_info->stop_url = info->oauth.callback;
+  priv->browser_info->session_handler = session_handler;
+
   /* TODO: use GInitable */
   if (!mojito_keystore_get_key_secret (info->name,
                                        &priv->consumer_key,
@@ -429,9 +443,12 @@ bisho_pane_oauth_init (BishoPaneOauth *pane)
 {
   BishoPaneOauthPrivate *priv;
   GtkWidget *content, *align, *box;
+  ServiceInfo *info = BISHO_PANE (pane)->info;
 
   pane->priv = GET_PRIVATE (pane);
   priv = pane->priv;
+
+  priv->browser_info = g_new0 (BrowserInfo, 1);
 
   content = BISHO_PANE (pane)->content;
 

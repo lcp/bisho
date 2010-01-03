@@ -9,7 +9,8 @@ bisho_SOURCES = \
 	bisho-pane.c bisho-pane.h \
 	bisho-module.c bisho-module.h \
 	service-info.c service-info.h \
-	mux-label.c mux-label.h
+	mux-label.c mux-label.h \
+	bisho-webkit.c bisho-webkit.h
 bisho_CPPFLAGS = $(DEPS_CFLAGS) \
 	-DLIBEXECDIR=\"@libexecdir@\" \
 	-DPKGLIBDIR=\"$(pkglibdir)\" \
