@@ -173,8 +173,6 @@ got_auth (RestXmlNode *node, BishoPaneFlickr *pane)
 {
   RestXmlNode *user;
   const char *name;
-  MojitoClientService *service;
-  BishoPane *generic_pane = BISHO_PANE (pane);
 
   user = rest_xml_node_find (node, "user");
   name = rest_xml_node_get_attr (user, "fullname");
@@ -182,8 +180,6 @@ got_auth (RestXmlNode *node, BishoPaneFlickr *pane)
     name = rest_xml_node_get_attr (user, "username");
 
   update_widgets (pane, LOGGED_IN, name);
-  service = mojito_client_get_service (generic_pane->mojito, generic_pane->info->name);
-  mojito_client_service_credentials_updated (service);
 }
 
 static void
@@ -191,6 +187,8 @@ continue_clicked (GtkWidget *button, gpointer user_data)
 {
   BishoPaneFlickr *pane = BISHO_PANE_FLICKR (user_data);
   BishoPaneFlickrPrivate *priv = pane->priv;
+  MojitoClientService *service;
+  BishoPane *generic_pane = BISHO_PANE (pane);
   RestProxyCall *call;
   RestXmlNode *node;
   const char *token;
@@ -241,6 +239,9 @@ continue_clicked (GtkWidget *button, gpointer user_data)
                                                  "mojito",
                                                  LIBEXECDIR "/mojito-core",
                                                  id, GNOME_KEYRING_ACCESS_READ);
+  
+    service = mojito_client_get_service (generic_pane->mojito, generic_pane->info->name);
+    mojito_client_service_credentials_updated (service);
   } else {
     g_message ("Cannot update keyring: %s", gnome_keyring_result_to_message (result));
     update_widgets (pane, LOGGED_OUT, NULL);
