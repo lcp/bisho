@@ -239,15 +239,15 @@ continue_clicked (GtkWidget *button, gpointer user_data)
                                                  "mojito",
                                                  LIBEXECDIR "/mojito-core",
                                                  id, GNOME_KEYRING_ACCESS_READ);
-  
-    service = mojito_client_get_service (generic_pane->mojito, generic_pane->info->name);
-    mojito_client_service_credentials_updated (service);
   } else {
     g_message ("Cannot update keyring: %s", gnome_keyring_result_to_message (result));
     update_widgets (pane, LOGGED_OUT, NULL);
   }
 
   rest_xml_node_unref (node);
+
+  service = mojito_client_get_service (generic_pane->mojito, generic_pane->info->name);
+  mojito_client_service_credentials_updated (service);
 }
 
 static void
