@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-01 09:20+0000\n"
+"POT-Creation-Date: 2010-01-07 18:06+0800\n"
 "PO-Revision-Date: 2009-08-06 11:07+0000\n"
 "Last-Translator: Ceyhun ALYEŞİL <ceyhunalyesil@gmail.com>\n"
 "Language-Team: TURKISH <LL@li.org>\n"
@@ -16,103 +16,142 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../data/bisho.desktop.in.h:1
-msgid "Web Services"
-msgstr "Web Servisleri"
+#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:146
+msgid "My Web Accounts"
+msgstr ""
 
-#: ../data/bisho.desktop.in.h:2
+#. Please don't translate "myzone"
+#: ../data/bisho.desktop.in.h:3
 msgid "myzone & status"
 msgstr "Alanım & Durum"
 
-#: ../src/bisho-window.c:94
+#: ../src/bisho-pane.c:86
 msgid "Launch site for more information."
 msgstr "Daha fazla bilgi için siteyi çalıştırın."
 
-#: ../src/bisho-window.c:105 ../src/bisho-window.c:121
-msgid "Username:"
-msgstr "Kullanıcı Adı:"
-
-#: ../src/bisho-window.c:127
-msgid "Password:"
-msgstr "Şifre:"
-
-#: ../src/bisho-window.c:197
-msgid "Web Services Settings"
-msgstr "Web Servis Ayarları"
-
-#: ../src/bisho-window.c:204
+#: ../src/bisho-pane.c:90
+#, fuzzy, c-format
 msgid ""
-"Set up your social networks to see new updates in myzone and the status "
-"panel."
-msgstr "Alanınızda ve durum panelinde yeni güncellemeleri görmek için sosyal ağlarınızı ayarlayın."
+"<small>You'll need an account with %s and an Internet connection to use this "
+"web service.</small>"
+msgstr ""
+"Bu web servisine erişmek için %s ile İnternet bağlantısına ihtiyacınız "
+"olacak."
 
-#: ../src/bisho-window.c:225
+#: ../src/bisho-pane.c:195
 #, c-format
-msgid "%s login changed."
-msgstr "%s giriş değişti"
+msgid "Sorry, we can't log in to %s. %s"
+msgstr ""
 
-#: ../src/bisho-facebook-pane.c:110 ../src/bisho-oauth-pane.c:62
-#: ../src/bisho-flickr-pane.c:65
+#: ../src/bisho-pane.c:199
 #, c-format
-msgid ""
-"You'll need an account with %s and an Internet connection to use this web "
-"service."
-msgstr "Bu web servisine erişmek için %s ile İnternet bağlantısına ihtiyacınız olacak."
+msgid "Sorry, we can't log in to %s"
+msgstr ""
 
-#: ../src/bisho-facebook-pane.c:307 ../src/bisho-oauth-pane.c:222
-#: ../src/bisho-flickr-pane.c:251
-msgid "Log in pending"
-msgstr "Oturum açılıyor"
-
-#: ../src/bisho-facebook-pane.c:308 ../src/bisho-oauth-pane.c:223
-#: ../src/bisho-flickr-pane.c:252
+#: ../src/bisho-pane-facebook.c:329 ../src/bisho-pane-flickr.c:267
+#: ../src/bisho-pane-oauth.c:314
 msgid "Log me in"
 msgstr "Oturumu Aç"
 
-#: ../src/bisho-facebook-pane.c:313 ../src/bisho-oauth-pane.c:228
-#: ../src/bisho-flickr-pane.c:257
-msgid "Log in pending..."
-msgstr "Oturum açılıyor..."
-
-#: ../src/bisho-facebook-pane.c:314 ../src/bisho-oauth-pane.c:229
-#: ../src/bisho-flickr-pane.c:258
+#: ../src/bisho-pane-facebook.c:335 ../src/bisho-pane-flickr.c:273
+#: ../src/bisho-pane-oauth.c:320
 msgid "Working..."
 msgstr "Çalışıyor..."
 
-#: ../src/bisho-facebook-pane.c:318
-msgid "Press Continue to continue the log in."
-msgstr "Oturum açmaya devam etmek için devam tuşuna basın."
-
-#: ../src/bisho-facebook-pane.c:319 ../src/bisho-oauth-pane.c:242
-#: ../src/bisho-flickr-pane.c:263
-msgid "Continue"
-msgstr "Devam"
-
-#: ../src/bisho-facebook-pane.c:326 ../src/bisho-flickr-pane.c:270
-#, c-format
-msgid "Logged in as %s"
-msgstr "%s olarak oturum açıldı"
-
-#: ../src/bisho-facebook-pane.c:330 ../src/bisho-oauth-pane.c:248
-#: ../src/bisho-flickr-pane.c:274
-msgid "Logged in"
-msgstr "Oturum açıldı"
-
-#: ../src/bisho-facebook-pane.c:332 ../src/bisho-oauth-pane.c:249
-#: ../src/bisho-flickr-pane.c:276
-msgid "Log me out"
-msgstr "Oturumu kapat"
-
-#: ../src/bisho-facebook-pane.c:396 ../src/bisho-oauth-pane.c:286
-#: ../src/bisho-flickr-pane.c:333
-msgid "<b>Status:</b>"
-msgstr "<b>Durum:</b>"
-
-#: ../src/bisho-oauth-pane.c:237
+#. Use the same string in bisho-pane-oauth.c for translations.
+#: ../src/bisho-pane-facebook.c:342 ../src/bisho-pane-oauth.c:328
 #, c-format
 msgid "Once you have logged in to %s, press Continue."
 msgstr "%s'e giriş yaptıktan sonra Devam'a basın."
 
-#: ../src/bisho-flickr-pane.c:262
+#: ../src/bisho-pane-facebook.c:347 ../src/bisho-pane-flickr.c:278
+#: ../src/bisho-pane-oauth.c:333 ../src/bisho-pane-oauth.c:350
+msgid "Continue"
+msgstr "Devam"
+
+#: ../src/bisho-pane-facebook.c:352 ../src/bisho-pane-flickr.c:282
+#: ../src/bisho-pane-oauth.c:355
+msgid "Log in succeeded. You'll see new items in a couple of minutes."
+msgstr ""
+
+#: ../src/bisho-pane-facebook.c:355 ../src/bisho-pane-flickr.c:285
+#: ../src/bisho-pane-oauth.c:357
+msgid "Log me out"
+msgstr "Oturumu kapat"
+
+#: ../src/bisho-pane-flickr.c:277
 msgid "Once you have logged in to Flickr, press Continue."
 msgstr "Flickr'a giriş yaptıktan sonra Devam'a basın."
+
+#: ../src/bisho-pane-oauth.c:86
+msgid "You don't seem to have a network connection, this won't work."
+msgstr ""
+
+#: ../src/bisho-pane-oauth.c:87
+msgid "You could check that the computer's clock is correct."
+msgstr ""
+
+#: ../src/bisho-pane-oauth.c:88
+msgid "You could try again."
+msgstr ""
+
+#: ../src/bisho-pane-oauth.c:345
+#, fuzzy, c-format
+msgid ""
+"Once you have logged in to %s, enter the code they give you and press "
+"Continue."
+msgstr "%s'e giriş yaptıktan sonra Devam'a basın."
+
+#: ../src/bisho-pane-oauth.c:399
+msgid "Code:"
+msgstr ""
+
+#: ../src/bisho-pane-username.c:57
+#, c-format
+msgid "%s login changed."
+msgstr "%s giriş değişti"
+
+#: ../src/bisho-window.c:76 ../src/bisho-window.c:83
+msgid "Username:"
+msgstr "Kullanıcı Adı:"
+
+#: ../src/bisho-window.c:85
+msgid "Password:"
+msgstr "Şifre:"
+
+#: ../src/bisho-window.c:171
+msgid "Quit"
+msgstr ""
+
+#. Please don't translate 'myzone'
+#: ../src/bisho-window.c:182
+msgid ""
+"Set up your social networks to see new updates in myzone and the status "
+"panel."
+msgstr ""
+"Alanınızda ve durum panelinde yeni güncellemeleri görmek için sosyal "
+"ağlarınızı ayarlayın."
+
+#~ msgid "Web Services"
+#~ msgstr "Web Servisleri"
+
+#~ msgid "Web Services Settings"
+#~ msgstr "Web Servis Ayarları"
+
+#~ msgid "Log in pending"
+#~ msgstr "Oturum açılıyor"
+
+#~ msgid "Log in pending..."
+#~ msgstr "Oturum açılıyor..."
+
+#~ msgid "Press Continue to continue the log in."
+#~ msgstr "Oturum açmaya devam etmek için devam tuşuna basın."
+
+#~ msgid "Logged in as %s"
+#~ msgstr "%s olarak oturum açıldı"
+
+#~ msgid "Logged in"
+#~ msgstr "Oturum açıldı"
+
+#~ msgid "<b>Status:</b>"
+#~ msgstr "<b>Durum:</b>"

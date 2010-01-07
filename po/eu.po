@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-07 18:31+0000\n"
+"POT-Creation-Date: 2010-01-07 18:06+0800\n"
 "PO-Revision-Date: 2009-10-14 14:34+0100\n"
 "Last-Translator: Mikel Pascual Aldabaldetreku <mikel.paskual@gmail.com>\n"
 "Language-Team: \n"
@@ -15,8 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../data/bisho.desktop.in.h:1
-#: ../src/bisho-window.c:169
+#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:146
 msgid "My Web Accounts"
 msgstr "Nire Web-Kontuak"
 
@@ -25,59 +24,70 @@ msgstr "Nire Web-Kontuak"
 msgid "myzone & status"
 msgstr "myzone eta egoera"
 
-#: ../src/bisho-pane.c:79
+#: ../src/bisho-pane.c:86
 msgid "Launch site for more information."
 msgstr "Webgunera jo informazio bila."
 
-#: ../src/bisho-pane.c:83
+#: ../src/bisho-pane.c:90
 #, c-format
-msgid "<small>You'll need an account with %s and an Internet connection to use this web service.</small>"
-msgstr "<small>%s-kontu bat eta Internet konexioa beharko dituzu web-zerbitzu hau erabiltzeko.</small>"
+msgid ""
+"<small>You'll need an account with %s and an Internet connection to use this "
+"web service.</small>"
+msgstr ""
+"<small>%s-kontu bat eta Internet konexioa beharko dituzu web-zerbitzu hau "
+"erabiltzeko.</small>"
 
-#: ../src/bisho-pane-flickr.c:245
-msgid "Log in pending"
-msgstr "Konektatzeke"
-
-#: ../src/bisho-pane-flickr.c:246
-#: ../src/bisho-pane-oauth.c:265
-msgid "Log me in"
-msgstr "Konektatu"
-
-#: ../src/bisho-pane-flickr.c:251
-msgid "Log in pending..."
-msgstr "Konektatzeke..."
-
-#: ../src/bisho-pane-flickr.c:252
-#: ../src/bisho-pane-oauth.c:270
-msgid "Working..."
-msgstr "Lanean..."
-
-#: ../src/bisho-pane-flickr.c:258
-#, c-format
-msgid "Logged in as %s"
-msgstr "%s bezala konektatuta"
-
-#: ../src/bisho-pane-flickr.c:262
-msgid "Logged in"
-msgstr "Konektatuta"
-
-#: ../src/bisho-pane-flickr.c:264
-#: ../src/bisho-pane-oauth.c:307
-msgid "Log me out"
-msgstr "Deskonektatu"
-
-#: ../src/bisho-pane-flickr.c:345
-msgid "<b>Status:</b>"
-msgstr "<b>Egoera:</b>"
-
-#: ../src/bisho-pane-oauth.c:85
-msgid "You don't seem to have a network connection, this won't work."
-msgstr "Sare-konexiorik ez daukazula dirudi; honek ez du funtzionatuko."
-
-#: ../src/bisho-pane-oauth.c:86
+#: ../src/bisho-pane.c:195
 #, c-format
 msgid "Sorry, we can't log in to %s. %s"
 msgstr "Lastima, ezin dugu %s-rekin konektatu. %s"
+
+#: ../src/bisho-pane.c:199
+#, c-format
+msgid "Sorry, we can't log in to %s"
+msgstr "Lastima, ezin dugu %s-rekin konektatu"
+
+#: ../src/bisho-pane-facebook.c:329 ../src/bisho-pane-flickr.c:267
+#: ../src/bisho-pane-oauth.c:314
+msgid "Log me in"
+msgstr "Konektatu"
+
+#: ../src/bisho-pane-facebook.c:335 ../src/bisho-pane-flickr.c:273
+#: ../src/bisho-pane-oauth.c:320
+msgid "Working..."
+msgstr "Lanean..."
+
+#. Use the same string in bisho-pane-oauth.c for translations.
+#: ../src/bisho-pane-facebook.c:342 ../src/bisho-pane-oauth.c:328
+#, c-format
+msgid "Once you have logged in to %s, press Continue."
+msgstr "%s-rekin konektatu ondoren, Jarraitu sakatu ezazu."
+
+#: ../src/bisho-pane-facebook.c:347 ../src/bisho-pane-flickr.c:278
+#: ../src/bisho-pane-oauth.c:333 ../src/bisho-pane-oauth.c:350
+msgid "Continue"
+msgstr "Jarraitu"
+
+#: ../src/bisho-pane-facebook.c:352 ../src/bisho-pane-flickr.c:282
+#: ../src/bisho-pane-oauth.c:355
+msgid "Log in succeeded. You'll see new items in a couple of minutes."
+msgstr ""
+"Arrakastaz konektatu zara. Minutu pare batean ikusiko dituzu elementu "
+"berriak."
+
+#: ../src/bisho-pane-facebook.c:355 ../src/bisho-pane-flickr.c:285
+#: ../src/bisho-pane-oauth.c:357
+msgid "Log me out"
+msgstr "Deskonektatu"
+
+#: ../src/bisho-pane-flickr.c:277
+#, fuzzy
+msgid "Once you have logged in to Flickr, press Continue."
+msgstr "%s-rekin konektatu ondoren, Jarraitu sakatu ezazu."
+
+#: ../src/bisho-pane-oauth.c:86
+msgid "You don't seem to have a network connection, this won't work."
+msgstr "Sare-konexiorik ez daukazula dirudi; honek ez du funtzionatuko."
 
 #: ../src/bisho-pane-oauth.c:87
 msgid "You could check that the computer's clock is correct."
@@ -87,51 +97,56 @@ msgstr "Zure ordenagailuaren ordularia ondo dagoela egiaztatu dezakezu."
 msgid "You could try again."
 msgstr "Berriro saiatu zaitezke."
 
-#: ../src/bisho-pane-oauth.c:112
-#: ../src/bisho-pane-oauth.c:206
+#: ../src/bisho-pane-oauth.c:345
 #, c-format
-msgid "Sorry, we can't log in to %s"
-msgstr "Lastima, ezin dugu %s-rekin konektatu"
+msgid ""
+"Once you have logged in to %s, enter the code they give you and press "
+"Continue."
+msgstr ""
+"%s-rekin konektatu ondoren, eman zizuten kodea idatzi ezazu eta Jarraitu "
+"sakatu ezazu."
 
-#: ../src/bisho-pane-oauth.c:278
-#, c-format
-msgid "Once you have logged in to %s, press Continue."
-msgstr "%s-rekin konektatu ondoren, Jarraitu sakatu ezazu."
-
-#: ../src/bisho-pane-oauth.c:283
-#: ../src/bisho-pane-oauth.c:300
-msgid "Continue"
-msgstr "Jarraitu"
-
-#: ../src/bisho-pane-oauth.c:295
-#, c-format
-msgid "Once you have logged in to %s, enter the code they give you and press Continue."
-msgstr "%s-rekin konektatu ondoren, eman zizuten kodea idatzi ezazu eta Jarraitu sakatu ezazu."
-
-#: ../src/bisho-pane-oauth.c:306
-msgid "Log in succeeded. You'll see new items in a couple of minutes."
-msgstr "Arrakastaz konektatu zara. Minutu pare batean ikusiko dituzu elementu berriak."
-
-#: ../src/bisho-pane-oauth.c:373
+#: ../src/bisho-pane-oauth.c:399
 msgid "Code:"
 msgstr "Kodea:"
 
-#: ../src/bisho-window.c:81
-#: ../src/bisho-window.c:97
-msgid "Username:"
-msgstr "Erabiltzailea:"
-
-#: ../src/bisho-window.c:103
-msgid "Password:"
-msgstr "Pasahitza:"
-
-#. Please don't translate 'myzone'
-#: ../src/bisho-window.c:178
-msgid "Set up your social networks to see new updates in myzone and the status panel."
-msgstr "Zure sare-sozialak konfiguratu itzazu, eguneraketak ikusi ahal izateko zure myzone eta egoera-panelean."
-
-#: ../src/entry.c:57
+#: ../src/bisho-pane-username.c:57
 #, c-format
 msgid "%s login changed."
 msgstr "%s-rako konexio-datuak aldatuta."
 
+#: ../src/bisho-window.c:76 ../src/bisho-window.c:83
+msgid "Username:"
+msgstr "Erabiltzailea:"
+
+#: ../src/bisho-window.c:85
+msgid "Password:"
+msgstr "Pasahitza:"
+
+#: ../src/bisho-window.c:171
+msgid "Quit"
+msgstr ""
+
+#. Please don't translate 'myzone'
+#: ../src/bisho-window.c:182
+msgid ""
+"Set up your social networks to see new updates in myzone and the status "
+"panel."
+msgstr ""
+"Zure sare-sozialak konfiguratu itzazu, eguneraketak ikusi ahal izateko zure "
+"myzone eta egoera-panelean."
+
+#~ msgid "Log in pending"
+#~ msgstr "Konektatzeke"
+
+#~ msgid "Log in pending..."
+#~ msgstr "Konektatzeke..."
+
+#~ msgid "Logged in as %s"
+#~ msgstr "%s bezala konektatuta"
+
+#~ msgid "Logged in"
+#~ msgstr "Konektatuta"
+
+#~ msgid "<b>Status:</b>"
+#~ msgstr "<b>Egoera:</b>"

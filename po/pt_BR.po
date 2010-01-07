@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-02 16:13+0000\n"
+"POT-Creation-Date: 2010-01-07 18:06+0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: GLSPTB_Gabor <gaborx.k.becht@intel.com>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-SourceCharset: utf-8\n"
 "Plural-Forms: nplurals=2; plural=n!=1;\n"
 
-#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:169
+#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:146
 msgid "My Web Accounts"
 msgstr "Minhas contas web"
 
@@ -22,11 +22,11 @@ msgstr "Minhas contas web"
 msgid "myzone & status"
 msgstr "myzone e status"
 
-#: ../src/bisho-pane.c:79
+#: ../src/bisho-pane.c:86
 msgid "Launch site for more information."
 msgstr "Inicie o site para maiores informações"
 
-#: ../src/bisho-pane.c:83
+#: ../src/bisho-pane.c:90
 #, c-format
 msgid ""
 "<small>You'll need an account with %s and an Internet connection to use this "
@@ -35,47 +35,54 @@ msgstr ""
 "<small>Você precisará de uma conta com %s e uma conexão Internet para usar "
 "este serviço web.</small>"
 
-#: ../src/bisho-pane-flickr.c:245
-msgid "Log in pending"
-msgstr "Login pendente"
-
-#: ../src/bisho-pane-flickr.c:246 ../src/bisho-pane-oauth.c:265
-msgid "Log me in"
-msgstr "Faça meu login"
-
-#: ../src/bisho-pane-flickr.c:251
-msgid "Log in pending..."
-msgstr "Login pendente..."
-
-#: ../src/bisho-pane-flickr.c:252 ../src/bisho-pane-oauth.c:270
-msgid "Working..."
-msgstr "Processando..."
-
-#: ../src/bisho-pane-flickr.c:258
-#, c-format
-msgid "Logged in as %s"
-msgstr "Logado como: %s"
-
-#: ../src/bisho-pane-flickr.c:262
-msgid "Logged in"
-msgstr "Logado  "
-
-#: ../src/bisho-pane-flickr.c:264 ../src/bisho-pane-oauth.c:307
-msgid "Log me out"
-msgstr "Faça meu logout"
-
-#: ../src/bisho-pane-flickr.c:345
-msgid "<b>Status:</b>"
-msgstr "<b>Status:</b>"
-
-#: ../src/bisho-pane-oauth.c:85
-msgid "You don't seem to have a network connection, this won't work."
-msgstr "Você parece não ter uma conexão de rede, isto não funcionará."
-
-#: ../src/bisho-pane-oauth.c:86
+#: ../src/bisho-pane.c:195
 #, c-format
 msgid "Sorry, we can't log in to %s. %s"
 msgstr "Sinto muito, não é possível fazer login no  %s. %s"
+
+#: ../src/bisho-pane.c:199
+#, c-format
+msgid "Sorry, we can't log in to %s"
+msgstr "Sinto muito, não é possível fazer login no %s"
+
+#: ../src/bisho-pane-facebook.c:329 ../src/bisho-pane-flickr.c:267
+#: ../src/bisho-pane-oauth.c:314
+msgid "Log me in"
+msgstr "Faça meu login"
+
+#: ../src/bisho-pane-facebook.c:335 ../src/bisho-pane-flickr.c:273
+#: ../src/bisho-pane-oauth.c:320
+msgid "Working..."
+msgstr "Processando..."
+
+#. Use the same string in bisho-pane-oauth.c for translations.
+#: ../src/bisho-pane-facebook.c:342 ../src/bisho-pane-oauth.c:328
+#, c-format
+msgid "Once you have logged in to %s, press Continue."
+msgstr "Uma vez logado no %s, pressione Continuar."
+
+#: ../src/bisho-pane-facebook.c:347 ../src/bisho-pane-flickr.c:278
+#: ../src/bisho-pane-oauth.c:333 ../src/bisho-pane-oauth.c:350
+msgid "Continue"
+msgstr "Continuar"
+
+#: ../src/bisho-pane-facebook.c:352 ../src/bisho-pane-flickr.c:282
+#: ../src/bisho-pane-oauth.c:355
+msgid "Log in succeeded. You'll see new items in a couple of minutes."
+msgstr "Login funcionou. Você verá novos itens em alguns minutos."
+
+#: ../src/bisho-pane-facebook.c:355 ../src/bisho-pane-flickr.c:285
+#: ../src/bisho-pane-oauth.c:357
+msgid "Log me out"
+msgstr "Faça meu logout"
+
+#: ../src/bisho-pane-flickr.c:277
+msgid "Once you have logged in to Flickr, press Continue."
+msgstr "Uma vez logado no Flickr, pressione Continuar."
+
+#: ../src/bisho-pane-oauth.c:86
+msgid "You don't seem to have a network connection, this won't work."
+msgstr "Você parece não ter uma conexão de rede, isto não funcionará."
 
 #: ../src/bisho-pane-oauth.c:87
 msgid "You could check that the computer's clock is correct."
@@ -85,45 +92,36 @@ msgstr "Você poderia verificar se o relógio do computador está correto."
 msgid "You could try again."
 msgstr "Você poderia tentar de novo."
 
-#: ../src/bisho-pane-oauth.c:112 ../src/bisho-pane-oauth.c:206
-#, c-format
-msgid "Sorry, we can't log in to %s"
-msgstr "Sinto muito, não é possível fazer login no %s"
-
-#: ../src/bisho-pane-oauth.c:278
-#, c-format
-msgid "Once you have logged in to %s, press Continue."
-msgstr "Uma vez logado no %s, pressione Continuar."
-
-#: ../src/bisho-pane-oauth.c:283 ../src/bisho-pane-oauth.c:300
-msgid "Continue"
-msgstr "Continuar"
-
-#: ../src/bisho-pane-oauth.c:295
+#: ../src/bisho-pane-oauth.c:345
 #, c-format
 msgid ""
 "Once you have logged in to %s, enter the code they give you and press "
 "Continue."
 msgstr "Uma vez logado no %s, digite o código fornecido e pressione Continuar."
 
-#: ../src/bisho-pane-oauth.c:306
-msgid "Log in succeeded. You'll see new items in a couple of minutes."
-msgstr "Login funcionou. Você verá novos itens em alguns minutos."
-
-#: ../src/bisho-pane-oauth.c:373
+#: ../src/bisho-pane-oauth.c:399
 msgid "Code:"
 msgstr "Código:"
 
-#: ../src/bisho-window.c:81 ../src/bisho-window.c:97
+#: ../src/bisho-pane-username.c:57
+#, c-format
+msgid "%s login changed."
+msgstr "Login modificado: %s."
+
+#: ../src/bisho-window.c:76 ../src/bisho-window.c:83
 msgid "Username:"
 msgstr "Nome do usuário:"
 
-#: ../src/bisho-window.c:103
+#: ../src/bisho-window.c:85
 msgid "Password:"
 msgstr "Senha:"
 
+#: ../src/bisho-window.c:171
+msgid "Quit"
+msgstr ""
+
 #. Please don't translate 'myzone'
-#: ../src/bisho-window.c:178
+#: ../src/bisho-window.c:182
 msgid ""
 "Set up your social networks to see new updates in myzone and the status "
 "panel."
@@ -131,10 +129,20 @@ msgstr ""
 "Configure suas redes sociais para ver novas atualizações na myzone e o no "
 "painel de status."
 
-#: ../src/entry.c:57
-#, c-format
-msgid "%s login changed."
-msgstr "Login modificado: %s."
+#~ msgid "Log in pending"
+#~ msgstr "Login pendente"
+
+#~ msgid "Log in pending..."
+#~ msgstr "Login pendente..."
+
+#~ msgid "Logged in as %s"
+#~ msgstr "Logado como: %s"
+
+#~ msgid "Logged in"
+#~ msgstr "Logado  "
+
+#~ msgid "<b>Status:</b>"
+#~ msgstr "<b>Status:</b>"
 
 #~ msgid ""
 #~ "You'll need an account with %s and an Internet connection to use this web "
@@ -154,6 +162,3 @@ msgstr "Login modificado: %s."
 
 #~ msgid "Web Services Settings"
 #~ msgstr "Configurações dos serviços na web"
-
-#~ msgid "Once you have logged in to Flickr, press Continue."
-#~ msgstr "Uma vez logado no Flickr, pressione Continuar."

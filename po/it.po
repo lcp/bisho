@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bisho\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-02 16:13+0000\n"
+"POT-Creation-Date: 2010-01-07 18:06+0800\n"
 "PO-Revision-Date: 2009-10-02 22:58+0200\n"
 "Last-Translator: Milo Casagrande <milo@ubuntu.com>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:169
+#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:146
 msgid "My Web Accounts"
 msgstr "Account web"
 
@@ -26,11 +26,11 @@ msgid "myzone & status"
 msgstr "myzone e stato"
 
 # (ndt) è una specie di pulsante/collegamento
-#: ../src/bisho-pane.c:79
+#: ../src/bisho-pane.c:86
 msgid "Launch site for more information."
 msgstr "Apri il sito web per maggiori informazioni."
 
-#: ../src/bisho-pane.c:83
+#: ../src/bisho-pane.c:90
 #, c-format
 msgid ""
 "<small>You'll need an account with %s and an Internet connection to use this "
@@ -39,48 +39,57 @@ msgstr ""
 "<small>Sono necessari un account con %s e una connessione a Internet per "
 "utilizzare questo servizio web.</small>"
 
-#: ../src/bisho-pane-flickr.c:245
-msgid "Log in pending"
-msgstr "Accesso in corso"
-
-# (ndt) pulsante
-#: ../src/bisho-pane-flickr.c:246 ../src/bisho-pane-oauth.c:265
-msgid "Log me in"
-msgstr "Accedi"
-
-#: ../src/bisho-pane-flickr.c:251
-msgid "Log in pending..."
-msgstr "Accesso..."
-
-#: ../src/bisho-pane-flickr.c:252 ../src/bisho-pane-oauth.c:270
-msgid "Working..."
-msgstr "In lavorazione..."
-
-#: ../src/bisho-pane-flickr.c:258
-#, c-format
-msgid "Logged in as %s"
-msgstr "Accesso effettuato come %s"
-
-#: ../src/bisho-pane-flickr.c:262
-msgid "Logged in"
-msgstr "Accesso effettuato"
-
-#: ../src/bisho-pane-flickr.c:264 ../src/bisho-pane-oauth.c:307
-msgid "Log me out"
-msgstr "Disconnetti"
-
-#: ../src/bisho-pane-flickr.c:345
-msgid "<b>Status:</b>"
-msgstr "<b>Stato:</b>"
-
-#: ../src/bisho-pane-oauth.c:85
-msgid "You don't seem to have a network connection, this won't work."
-msgstr "La connessione di rete non sembra attiva, questo non funzionerà."
-
-#: ../src/bisho-pane-oauth.c:86
+#: ../src/bisho-pane.c:195
 #, c-format
 msgid "Sorry, we can't log in to %s. %s"
 msgstr "Impossibile accedere a %s. %s"
+
+#: ../src/bisho-pane.c:199
+#, c-format
+msgid "Sorry, we can't log in to %s"
+msgstr "Impossibile accedere a %s"
+
+# (ndt) pulsante
+#: ../src/bisho-pane-facebook.c:329 ../src/bisho-pane-flickr.c:267
+#: ../src/bisho-pane-oauth.c:314
+msgid "Log me in"
+msgstr "Accedi"
+
+#: ../src/bisho-pane-facebook.c:335 ../src/bisho-pane-flickr.c:273
+#: ../src/bisho-pane-oauth.c:320
+msgid "Working..."
+msgstr "In lavorazione..."
+
+#. Use the same string in bisho-pane-oauth.c for translations.
+#: ../src/bisho-pane-facebook.c:342 ../src/bisho-pane-oauth.c:328
+#, c-format
+msgid "Once you have logged in to %s, press Continue."
+msgstr "Una volta eseguito l'accesso a %s, fare clic su «Continua»."
+
+# (ndt) pulsante
+#: ../src/bisho-pane-facebook.c:347 ../src/bisho-pane-flickr.c:278
+#: ../src/bisho-pane-oauth.c:333 ../src/bisho-pane-oauth.c:350
+msgid "Continue"
+msgstr "Continua"
+
+#: ../src/bisho-pane-facebook.c:352 ../src/bisho-pane-flickr.c:282
+#: ../src/bisho-pane-oauth.c:355
+msgid "Log in succeeded. You'll see new items in a couple of minutes."
+msgstr ""
+"Accesso eseguito. In un paio di minuti verranno visualizzati nuovi elementi."
+
+#: ../src/bisho-pane-facebook.c:355 ../src/bisho-pane-flickr.c:285
+#: ../src/bisho-pane-oauth.c:357
+msgid "Log me out"
+msgstr "Disconnetti"
+
+#: ../src/bisho-pane-flickr.c:277
+msgid "Once you have logged in to Flickr, press Continue."
+msgstr "Una volta eseguito l'accesso a Flickr, fare clic su «Continua»."
+
+#: ../src/bisho-pane-oauth.c:86
+msgid "You don't seem to have a network connection, this won't work."
+msgstr "La connessione di rete non sembra attiva, questo non funzionerà."
 
 #: ../src/bisho-pane-oauth.c:87
 msgid "You could check that the computer's clock is correct."
@@ -90,22 +99,7 @@ msgstr "Controllare che l'orologio del computer sia corretto."
 msgid "You could try again."
 msgstr "Provare nuovamente"
 
-#: ../src/bisho-pane-oauth.c:112 ../src/bisho-pane-oauth.c:206
-#, c-format
-msgid "Sorry, we can't log in to %s"
-msgstr "Impossibile accedere a %s"
-
-#: ../src/bisho-pane-oauth.c:278
-#, c-format
-msgid "Once you have logged in to %s, press Continue."
-msgstr "Una volta eseguito l'accesso a %s, fare clic su «Continua»."
-
-# (ndt) pulsante
-#: ../src/bisho-pane-oauth.c:283 ../src/bisho-pane-oauth.c:300
-msgid "Continue"
-msgstr "Continua"
-
-#: ../src/bisho-pane-oauth.c:295
+#: ../src/bisho-pane-oauth.c:345
 #, c-format
 msgid ""
 "Once you have logged in to %s, enter the code they give you and press "
@@ -114,25 +108,32 @@ msgstr ""
 "Una volta eseguito l'accesso a %s, inserire il codice fornito e fare clic su "
 "«Continua»."
 
-#: ../src/bisho-pane-oauth.c:306
-msgid "Log in succeeded. You'll see new items in a couple of minutes."
-msgstr ""
-"Accesso eseguito. In un paio di minuti verranno visualizzati nuovi elementi."
-
-#: ../src/bisho-pane-oauth.c:373
+#: ../src/bisho-pane-oauth.c:399
 msgid "Code:"
 msgstr "Codice:"
 
-#: ../src/bisho-window.c:81 ../src/bisho-window.c:97
+# (ndt) un po' lunga e libera, ma c'è spazio
+# si vede quando si modificano le credenziali
+# di un servizio web
+#: ../src/bisho-pane-username.c:57
+#, c-format
+msgid "%s login changed."
+msgstr "Informazioni di accesso di %s modificate."
+
+#: ../src/bisho-window.c:76 ../src/bisho-window.c:83
 msgid "Username:"
 msgstr "Nome utente:"
 
-#: ../src/bisho-window.c:103
+#: ../src/bisho-window.c:85
 msgid "Password:"
 msgstr "Password:"
 
+#: ../src/bisho-window.c:171
+msgid "Quit"
+msgstr ""
+
 #. Please don't translate 'myzone'
-#: ../src/bisho-window.c:178
+#: ../src/bisho-window.c:182
 msgid ""
 "Set up your social networks to see new updates in myzone and the status "
 "panel."
@@ -140,13 +141,20 @@ msgstr ""
 "Impostare i social network a cui si partecipa per visualizzare aggiornamenti "
 "all'interno della myzone e nel pannello di stato."
 
-# (ndt) un po' lunga e libera, ma c'è spazio
-# si vede quando si modificano le credenziali
-# di un servizio web
-#: ../src/entry.c:57
-#, c-format
-msgid "%s login changed."
-msgstr "Informazioni di accesso di %s modificate."
+#~ msgid "Log in pending"
+#~ msgstr "Accesso in corso"
+
+#~ msgid "Log in pending..."
+#~ msgstr "Accesso..."
+
+#~ msgid "Logged in as %s"
+#~ msgstr "Accesso effettuato come %s"
+
+#~ msgid "Logged in"
+#~ msgstr "Accesso effettuato"
+
+#~ msgid "<b>Status:</b>"
+#~ msgstr "<b>Stato:</b>"
 
 #~ msgid ""
 #~ "You'll need an account with %s and an Internet connection to use this web "
@@ -166,6 +174,3 @@ msgstr "Informazioni di accesso di %s modificate."
 
 #~ msgid "Web Services Settings"
 #~ msgstr "Impostazioni dei servizi web"
-
-#~ msgid "Once you have logged in to Flickr, press Continue."
-#~ msgstr "Una volta eseguito l'accesso a Flickr, fare clic su «Continua»."

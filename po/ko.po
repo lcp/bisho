@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 16:20+0000\n"
+"POT-Creation-Date: 2010-01-07 18:06+0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: GLSKOR_SunKim <sunx.kim@intel.com>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-Language: Korean\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:169
+#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:146
 msgid "My Web Accounts"
 msgstr "내 웹 계정"
 
@@ -22,11 +22,11 @@ msgstr "내 웹 계정"
 msgid "myzone & status"
 msgstr "myzone & 상태 "
 
-#: ../src/bisho-pane.c:79
+#: ../src/bisho-pane.c:86
 msgid "Launch site for more information."
 msgstr "더 많은 정보를 보려면 사이트를 시작하십시오."
 
-#: ../src/bisho-pane.c:83
+#: ../src/bisho-pane.c:90
 #, c-format
 msgid ""
 "<small>You'll need an account with %s and an Internet connection to use this "
@@ -35,47 +35,54 @@ msgstr ""
 "<small>%s 계정 및 이 웹 서비스를 사용할 수 있는 인터넷 연결 기능이 필요합니"
 "다.</small>"
 
-#: ../src/bisho-pane-flickr.c:245
-msgid "Log in pending"
-msgstr "로그인 보류"
-
-#: ../src/bisho-pane-flickr.c:246 ../src/bisho-pane-oauth.c:265
-msgid "Log me in"
-msgstr "로그인"
-
-#: ../src/bisho-pane-flickr.c:251
-msgid "Log in pending..."
-msgstr "로그인 보류..."
-
-#: ../src/bisho-pane-flickr.c:252 ../src/bisho-pane-oauth.c:270
-msgid "Working..."
-msgstr "작업중..."
-
-#: ../src/bisho-pane-flickr.c:258
-#, c-format
-msgid "Logged in as %s"
-msgstr "%s으로 로그인됨"
-
-#: ../src/bisho-pane-flickr.c:262
-msgid "Logged in"
-msgstr "로그인됨"
-
-#: ../src/bisho-pane-flickr.c:264 ../src/bisho-pane-oauth.c:307
-msgid "Log me out"
-msgstr "로그아웃"
-
-#: ../src/bisho-pane-flickr.c:345
-msgid "<b>Status:</b>"
-msgstr "<b>상태:</b>"
-
-#: ../src/bisho-pane-oauth.c:85
-msgid "You don't seem to have a network connection, this won't work."
-msgstr "네트워크에 연결되지 않는 것 같으므로 작동하지 않습니다."
-
-#: ../src/bisho-pane-oauth.c:86
+#: ../src/bisho-pane.c:195
 #, c-format
 msgid "Sorry, we can't log in to %s. %s"
 msgstr "죄송합니다. %s에 로그인 할수 없습니다. %s"
+
+#: ../src/bisho-pane.c:199
+#, c-format
+msgid "Sorry, we can't log in to %s"
+msgstr "죄송합니다. %s에 로그인 할수 없습니다."
+
+#: ../src/bisho-pane-facebook.c:329 ../src/bisho-pane-flickr.c:267
+#: ../src/bisho-pane-oauth.c:314
+msgid "Log me in"
+msgstr "로그인"
+
+#: ../src/bisho-pane-facebook.c:335 ../src/bisho-pane-flickr.c:273
+#: ../src/bisho-pane-oauth.c:320
+msgid "Working..."
+msgstr "작업중..."
+
+#. Use the same string in bisho-pane-oauth.c for translations.
+#: ../src/bisho-pane-facebook.c:342 ../src/bisho-pane-oauth.c:328
+#, c-format
+msgid "Once you have logged in to %s, press Continue."
+msgstr "일단 %s에 로그인 했으면 [계속]을 선택하십시오. "
+
+#: ../src/bisho-pane-facebook.c:347 ../src/bisho-pane-flickr.c:278
+#: ../src/bisho-pane-oauth.c:333 ../src/bisho-pane-oauth.c:350
+msgid "Continue"
+msgstr "계속"
+
+#: ../src/bisho-pane-facebook.c:352 ../src/bisho-pane-flickr.c:282
+#: ../src/bisho-pane-oauth.c:355
+msgid "Log in succeeded. You'll see new items in a couple of minutes."
+msgstr "성공적으로 로그인 하셨습니다. 몇 분 후에 새 항목이 나타날 것입니다. "
+
+#: ../src/bisho-pane-facebook.c:355 ../src/bisho-pane-flickr.c:285
+#: ../src/bisho-pane-oauth.c:357
+msgid "Log me out"
+msgstr "로그아웃"
+
+#: ../src/bisho-pane-flickr.c:277
+msgid "Once you have logged in to Flickr, press Continue."
+msgstr "일단 Flickr에 로그인 했으면 [계속]을 선택하십시오. "
+
+#: ../src/bisho-pane-oauth.c:86
+msgid "You don't seem to have a network connection, this won't work."
+msgstr "네트워크에 연결되지 않는 것 같으므로 작동하지 않습니다."
 
 #: ../src/bisho-pane-oauth.c:87
 msgid "You could check that the computer's clock is correct."
@@ -85,21 +92,7 @@ msgstr "컴퓨터의 시계가 정확한지 확인할 수 있습니다."
 msgid "You could try again."
 msgstr "다시 시도해 보십시오."
 
-#: ../src/bisho-pane-oauth.c:112 ../src/bisho-pane-oauth.c:206
-#, c-format
-msgid "Sorry, we can't log in to %s"
-msgstr "죄송합니다. %s에 로그인 할수 없습니다."
-
-#: ../src/bisho-pane-oauth.c:278
-#, c-format
-msgid "Once you have logged in to %s, press Continue."
-msgstr "일단 %s에 로그인 했으면 [계속]을 선택하십시오. "
-
-#: ../src/bisho-pane-oauth.c:283 ../src/bisho-pane-oauth.c:300
-msgid "Continue"
-msgstr "계속"
-
-#: ../src/bisho-pane-oauth.c:295
+#: ../src/bisho-pane-oauth.c:345
 #, c-format
 msgid ""
 "Once you have logged in to %s, enter the code they give you and press "
@@ -107,24 +100,29 @@ msgid ""
 msgstr ""
 "일단 %s에 로그인 했으면, 주어진 코드를 입력하고 [계속]을 선택하십시오. "
 
-#: ../src/bisho-pane-oauth.c:306
-msgid "Log in succeeded. You'll see new items in a couple of minutes."
-msgstr "성공적으로 로그인 하셨습니다. 몇 분 후에 새 항목이 나타날 것입니다. "
-
-#: ../src/bisho-pane-oauth.c:373
+#: ../src/bisho-pane-oauth.c:399
 msgid "Code:"
 msgstr "코드:"
 
-#: ../src/bisho-window.c:81 ../src/bisho-window.c:97
+#: ../src/bisho-pane-username.c:57
+#, c-format
+msgid "%s login changed."
+msgstr "%s 로그인이 변경되었습니다."
+
+#: ../src/bisho-window.c:76 ../src/bisho-window.c:83
 msgid "Username:"
 msgstr "사용자 이름:"
 
-#: ../src/bisho-window.c:103
+#: ../src/bisho-window.c:85
 msgid "Password:"
 msgstr "암호:"
 
+#: ../src/bisho-window.c:171
+msgid "Quit"
+msgstr ""
+
 #. Please don't translate 'myzone'
-#: ../src/bisho-window.c:178
+#: ../src/bisho-window.c:182
 msgid ""
 "Set up your social networks to see new updates in myzone and the status "
 "panel."
@@ -132,10 +130,20 @@ msgstr ""
 "myzone의 새로운 업데이트 및 상태 패널을 보기 위해 귀하의 소셜 네트워크를 설정"
 "하십시오. "
 
-#: ../src/entry.c:57
-#, c-format
-msgid "%s login changed."
-msgstr "%s 로그인이 변경되었습니다."
+#~ msgid "Log in pending"
+#~ msgstr "로그인 보류"
+
+#~ msgid "Log in pending..."
+#~ msgstr "로그인 보류..."
+
+#~ msgid "Logged in as %s"
+#~ msgstr "%s으로 로그인됨"
+
+#~ msgid "Logged in"
+#~ msgstr "로그인됨"
+
+#~ msgid "<b>Status:</b>"
+#~ msgstr "<b>상태:</b>"
 
 #~ msgid ""
 #~ "You'll need an account with %s and an Internet connection to use this web "
@@ -154,6 +162,3 @@ msgstr "%s 로그인이 변경되었습니다."
 
 #~ msgid "Web Services Settings"
 #~ msgstr "웹 서비스 설정"
-
-#~ msgid "Once you have logged in to Flickr, press Continue."
-#~ msgstr "일단 Flickr에 로그인 했으면 [계속]을 선택하십시오. "

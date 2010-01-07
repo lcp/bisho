@@ -1,12 +1,12 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# 
+#
 # Xosé <xosecalvo@edu.xunta.es>, 2009.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-16 11:25+0000\n"
+"POT-Creation-Date: 2010-01-07 18:06+0800\n"
 "PO-Revision-Date: 2009-09-16 16:31+0200\n"
 "Last-Translator: Xosé <xosecalvo@edu.xunta.es>\n"
 "Language-Team: Galego <proxecto@trasno.org>\n"
@@ -15,6 +15,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.0\n"
+
+#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:146
+msgid "My Web Accounts"
+msgstr "As miñas contas web"
 
 #. Please don't translate "myzone"
 #: ../data/bisho.desktop.in.h:3
@@ -25,92 +29,110 @@ msgstr "amiñazona e estado"
 msgid "Launch site for more information."
 msgstr "Abrir o sitio para máis información."
 
-#: ../src/bisho-pane-flickr.c:243 ../src/bisho-pane-oauth.c:296
-msgid "Log me in"
-msgstr "Déixame entrar"
-
-#: ../src/bisho-pane-flickr.c:249 ../src/bisho-pane-oauth.c:302
-msgid "Working..."
-msgstr "A traballar..."
-
-#: ../src/bisho-pane-flickr.c:255 ../src/bisho-pane-oauth.c:339
-msgid "Log me out"
-msgstr "Fechar esta sesión"
-
-#: ../src/bisho-pane-oauth.c:310
+#: ../src/bisho-pane.c:90
 #, c-format
-msgid "Once you have logged in to %s, press Continue."
-msgstr "Unha vez dentro de %s prema Continuar"
-
-#: ../src/bisho-pane-oauth.c:315 ../src/bisho-pane-oauth.c:332
-msgid "Continue"
-msgstr "Continuar"
-
-#: ../src/bisho-pane-username.c:57
-#, c-format
-msgid "%s login changed."
-msgstr "Modificouse o inicio de sesión de %s."
-
-#: ../src/bisho-window.c:75 ../src/bisho-window.c:82
-msgid "Username:"
-msgstr "Nome de usuario:"
-
-#: ../src/bisho-window.c:84
-msgid "Password:"
-msgstr "Contrasinal:"
-
-#. Please don't translate 'myzone'
-#: ../src/bisho-window.c:174
-msgid "Set up your social networks to see new updates in myzone and the status panel."
-msgstr "Configure as súas redes sociais para ver as actualizacións novas en amiñazona e o panel de estado."
-
-#: ../src/bisho-window.c:163
-msgid "Quit"
-msgstr "Saír"
-
-#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:139
-msgid "My Web Accounts"
-msgstr "As miñas contas web"
+msgid ""
+"<small>You'll need an account with %s and an Internet connection to use this "
+"web service.</small>"
+msgstr ""
+"<small>Precisa dunha conta en %s e dunha conexión á Internet para empregar "
+"este servizo web.</small>"
 
 #: ../src/bisho-pane.c:195
 #, c-format
 msgid "Sorry, we can't log in to %s. %s"
 msgstr "Non é posíbel iniciar unha sesión en %s. %s"
 
-#: ../src/bisho-pane.c:90
-#, c-format
-msgid "<small>You'll need an account with %s and an Internet connection to use this web service.</small>"
-msgstr "<small>Precisa dunha conta en %s e dunha conexión á Internet para empregar este servizo web.</small>"
-
 #: ../src/bisho-pane.c:199
 #, c-format
 msgid "Sorry, we can't log in to %s"
 msgstr "Non é posíbel iniciar unha sesión en %s"
 
-#: ../src/bisho-pane-flickr.c:252 ../src/bisho-pane-oauth.c:337
+#: ../src/bisho-pane-facebook.c:329 ../src/bisho-pane-flickr.c:267
+#: ../src/bisho-pane-oauth.c:314
+msgid "Log me in"
+msgstr "Déixame entrar"
+
+#: ../src/bisho-pane-facebook.c:335 ../src/bisho-pane-flickr.c:273
+#: ../src/bisho-pane-oauth.c:320
+msgid "Working..."
+msgstr "A traballar..."
+
+#. Use the same string in bisho-pane-oauth.c for translations.
+#: ../src/bisho-pane-facebook.c:342 ../src/bisho-pane-oauth.c:328
+#, c-format
+msgid "Once you have logged in to %s, press Continue."
+msgstr "Unha vez dentro de %s prema Continuar"
+
+#: ../src/bisho-pane-facebook.c:347 ../src/bisho-pane-flickr.c:278
+#: ../src/bisho-pane-oauth.c:333 ../src/bisho-pane-oauth.c:350
+msgid "Continue"
+msgstr "Continuar"
+
+#: ../src/bisho-pane-facebook.c:352 ../src/bisho-pane-flickr.c:282
+#: ../src/bisho-pane-oauth.c:355
 msgid "Log in succeeded. You'll see new items in a couple of minutes."
 msgstr "Rexistro completado. Verá os elementos novos nun par de minutos."
 
-#: ../src/bisho-pane-oauth.c:84
+#: ../src/bisho-pane-facebook.c:355 ../src/bisho-pane-flickr.c:285
+#: ../src/bisho-pane-oauth.c:357
+msgid "Log me out"
+msgstr "Fechar esta sesión"
+
+#: ../src/bisho-pane-flickr.c:277
+#, fuzzy
+msgid "Once you have logged in to Flickr, press Continue."
+msgstr "Unha vez dentro de %s prema Continuar"
+
+#: ../src/bisho-pane-oauth.c:86
 msgid "You don't seem to have a network connection, this won't work."
 msgstr "Parece que non hai conexión coa rede; isto non vai funcionar."
 
-#: ../src/bisho-pane-oauth.c:86
-msgid "You could try again."
-msgstr "Pódeo tentar de novo."
-
-#: ../src/bisho-pane-oauth.c:85
+#: ../src/bisho-pane-oauth.c:87
 msgid "You could check that the computer's clock is correct."
 msgstr "Debería verificar que a hora do reloxo do computador está ben."
 
-#: ../src/bisho-pane-oauth.c:378
+#: ../src/bisho-pane-oauth.c:88
+msgid "You could try again."
+msgstr "Pódeo tentar de novo."
+
+#: ../src/bisho-pane-oauth.c:345
+#, c-format
+msgid ""
+"Once you have logged in to %s, enter the code they give you and press "
+"Continue."
+msgstr ""
+"Unha vez dentro de %s, introduza o código que lle dan e prema Continuar"
+
+#: ../src/bisho-pane-oauth.c:399
 msgid "Code:"
 msgstr "Código:"
 
-#: ../src/bisho-pane-oauth.c:327
+#: ../src/bisho-pane-username.c:57
 #, c-format
-msgid "Once you have logged in to %s, enter the code they give you and press Continue."
-msgstr "Unha vez dentro de %s, introduza o código que lle dan e prema Continuar"
+msgid "%s login changed."
+msgstr "Modificouse o inicio de sesión de %s."
+
+#: ../src/bisho-window.c:76 ../src/bisho-window.c:83
+msgid "Username:"
+msgstr "Nome de usuario:"
+
+#: ../src/bisho-window.c:85
+msgid "Password:"
+msgstr "Contrasinal:"
+
+#: ../src/bisho-window.c:171
+msgid "Quit"
+msgstr "Saír"
+
+#. Please don't translate 'myzone'
+#: ../src/bisho-window.c:182
+msgid ""
+"Set up your social networks to see new updates in myzone and the status "
+"panel."
+msgstr ""
+"Configure as súas redes sociais para ver as actualizacións novas en "
+"amiñazona e o panel de estado."
 
 #~ msgid "Web Services"
 #~ msgstr "Servizos web"

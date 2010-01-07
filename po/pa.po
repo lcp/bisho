@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bisho.Moblin2-UI.bisho\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-02 16:13+0000\n"
+"POT-Creation-Date: 2010-01-07 18:06+0800\n"
 "PO-Revision-Date: 2009-10-04 08:54+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <kde-i18n-doc@kde.org>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:169
+#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:146
 msgid "My Web Accounts"
 msgstr "ਮੇਰੇ ਵੈੱਬ ਅਕਾਊਂਟ"
 
@@ -25,11 +25,11 @@ msgstr "ਮੇਰੇ ਵੈੱਬ ਅਕਾਊਂਟ"
 msgid "myzone & status"
 msgstr "myzone & ਹਾਲਤ"
 
-#: ../src/bisho-pane.c:79
+#: ../src/bisho-pane.c:86
 msgid "Launch site for more information."
 msgstr "ਹੋਰ ਜਾਣਕਾਰੀ ਲਈ ਸਾਈਟ ਚਲਾਓ।"
 
-#: ../src/bisho-pane.c:83
+#: ../src/bisho-pane.c:90
 #, c-format
 msgid ""
 "<small>You'll need an account with %s and an Internet connection to use this "
@@ -38,47 +38,54 @@ msgstr ""
 "<small>ਤੁਹਾਨੂੰ ਇਹ ਵੈੱਬ ਸਰਵਿਸ ਨੂੰ ਵਰਤਣ ਲਈ %s ਨਾਲ ਅਕਾਊਂਟ ਅਤੇ ਇੰਟਰਨੈੱਟ ਕੁਨੈਕਸ਼ਨ ਵੀ ਚਾਹੀਦਾ ਹੈ।</"
 "small>"
 
-#: ../src/bisho-pane-flickr.c:245
-msgid "Log in pending"
-msgstr "ਲਾਗਇਨ ਕਰਨਾ ਬਾਕੀ"
-
-#: ../src/bisho-pane-flickr.c:246 ../src/bisho-pane-oauth.c:265
-msgid "Log me in"
-msgstr "ਮੈਨੂੰ ਲਾਗਇਨ ਕਰੋ"
-
-#: ../src/bisho-pane-flickr.c:251
-msgid "Log in pending..."
-msgstr "ਲਾਗਇਨ ਬਾਕੀ ਹੈ..."
-
-#: ../src/bisho-pane-flickr.c:252 ../src/bisho-pane-oauth.c:270
-msgid "Working..."
-msgstr "ਜਾਰੀ ਹੈ..."
-
-#: ../src/bisho-pane-flickr.c:258
-#, c-format
-msgid "Logged in as %s"
-msgstr "%s ਵਜੋਂ ਲਾਗਇਨ ਕੀਤਾ"
-
-#: ../src/bisho-pane-flickr.c:262
-msgid "Logged in"
-msgstr "ਲਾਗਇਨ"
-
-#: ../src/bisho-pane-flickr.c:264 ../src/bisho-pane-oauth.c:307
-msgid "Log me out"
-msgstr "ਮੈਨੂੰ ਲਾਗ ਆਉਟ ਕਰੋ"
-
-#: ../src/bisho-pane-flickr.c:345
-msgid "<b>Status:</b>"
-msgstr "<b>ਹਾਲਤ:</b>"
-
-#: ../src/bisho-pane-oauth.c:85
-msgid "You don't seem to have a network connection, this won't work."
-msgstr "ਤੁਹਾਡੇ ਕੋਲ ਨੈੱਟਵਰਕ ਕੁਨੈਕਸ਼ਨ ਨਹੀਂ ਜਾਪਦਾ ਹੈ, ਇਹ ਕੰਮ ਨਹੀਂ ਕਰੇਗਾ।"
-
-#: ../src/bisho-pane-oauth.c:86
+#: ../src/bisho-pane.c:195
 #, c-format
 msgid "Sorry, we can't log in to %s. %s"
 msgstr "ਅਫਸੋਸ, %s ਉੱਤੇ ਅਸੀਂ ਲਗਾਇਨ ਨਹੀਂ ਕਰ ਸਕਦੇ। %s"
+
+#: ../src/bisho-pane.c:199
+#, c-format
+msgid "Sorry, we can't log in to %s"
+msgstr "ਅਫਸੋਸ, ਅਸੀਂ %s ਵਿੱਚ ਲਾਗਇਨ ਨਹੀਂ ਕਰ ਸਕਦੇ।"
+
+#: ../src/bisho-pane-facebook.c:329 ../src/bisho-pane-flickr.c:267
+#: ../src/bisho-pane-oauth.c:314
+msgid "Log me in"
+msgstr "ਮੈਨੂੰ ਲਾਗਇਨ ਕਰੋ"
+
+#: ../src/bisho-pane-facebook.c:335 ../src/bisho-pane-flickr.c:273
+#: ../src/bisho-pane-oauth.c:320
+msgid "Working..."
+msgstr "ਜਾਰੀ ਹੈ..."
+
+#. Use the same string in bisho-pane-oauth.c for translations.
+#: ../src/bisho-pane-facebook.c:342 ../src/bisho-pane-oauth.c:328
+#, c-format
+msgid "Once you have logged in to %s, press Continue."
+msgstr "ਜਦੋਂ ਤੁਸੀਂ %s ਵਿੱਚ ਲਾਗਇਨ ਕਰ ਗਏ ਤਾਂ ਜਾਰੀ ਰੱਖੋ ਦੱਬੋ।"
+
+#: ../src/bisho-pane-facebook.c:347 ../src/bisho-pane-flickr.c:278
+#: ../src/bisho-pane-oauth.c:333 ../src/bisho-pane-oauth.c:350
+msgid "Continue"
+msgstr "ਜਾਰੀ ਰੱਖੋ"
+
+#: ../src/bisho-pane-facebook.c:352 ../src/bisho-pane-flickr.c:282
+#: ../src/bisho-pane-oauth.c:355
+msgid "Log in succeeded. You'll see new items in a couple of minutes."
+msgstr "ਲਾਗਇਨ ਸਫ਼ਲ ਰਿਹਾ ਹੈ। ਤੁਹਾਡੀ ਕੁਝ ਕੁ ਮਿੰਟਾਂ ਵਿੱਚ ਨਵੀਆਂ ਆਈਟਮਾਂ ਵੇਖੋਗੇ।"
+
+#: ../src/bisho-pane-facebook.c:355 ../src/bisho-pane-flickr.c:285
+#: ../src/bisho-pane-oauth.c:357
+msgid "Log me out"
+msgstr "ਮੈਨੂੰ ਲਾਗ ਆਉਟ ਕਰੋ"
+
+#: ../src/bisho-pane-flickr.c:277
+msgid "Once you have logged in to Flickr, press Continue."
+msgstr "ਜਦੋਂ ਤੁਸੀਂ ਫਲਿੱਕਰ 'ਚ ਲਾਗਇਨ ਕਰ ਗਏ ਤਾਂ ਜਾਰੀ ਰੱਖੋ ਦੱਬੋ।"
+
+#: ../src/bisho-pane-oauth.c:86
+msgid "You don't seem to have a network connection, this won't work."
+msgstr "ਤੁਹਾਡੇ ਕੋਲ ਨੈੱਟਵਰਕ ਕੁਨੈਕਸ਼ਨ ਨਹੀਂ ਜਾਪਦਾ ਹੈ, ਇਹ ਕੰਮ ਨਹੀਂ ਕਰੇਗਾ।"
 
 #: ../src/bisho-pane-oauth.c:87
 msgid "You could check that the computer's clock is correct."
@@ -88,54 +95,55 @@ msgstr "ਤੁਸੀਂ ਚੈੱਕ ਕਰ ਸਕਦੇ ਹੋ ਕਿ ਤੁਹ
 msgid "You could try again."
 msgstr "ਤੁਸੀਂ ਫੇਰ ਕੋਸ਼ਿਸ਼ ਕਰ ਸਕਦੇ ਹੋ।"
 
-#: ../src/bisho-pane-oauth.c:112 ../src/bisho-pane-oauth.c:206
-#, c-format
-msgid "Sorry, we can't log in to %s"
-msgstr "ਅਫਸੋਸ, ਅਸੀਂ %s ਵਿੱਚ ਲਾਗਇਨ ਨਹੀਂ ਕਰ ਸਕਦੇ।"
-
-#: ../src/bisho-pane-oauth.c:278
-#, c-format
-msgid "Once you have logged in to %s, press Continue."
-msgstr "ਜਦੋਂ ਤੁਸੀਂ %s ਵਿੱਚ ਲਾਗਇਨ ਕਰ ਗਏ ਤਾਂ ਜਾਰੀ ਰੱਖੋ ਦੱਬੋ।"
-
-#: ../src/bisho-pane-oauth.c:283 ../src/bisho-pane-oauth.c:300
-msgid "Continue"
-msgstr "ਜਾਰੀ ਰੱਖੋ"
-
-#: ../src/bisho-pane-oauth.c:295
+#: ../src/bisho-pane-oauth.c:345
 #, c-format
 msgid ""
 "Once you have logged in to %s, enter the code they give you and press "
 "Continue."
 msgstr "ਜਦੋਂ ਤੁਸੀਂ %s ਵਿੱਚ ਲਾਗਇਨ ਕਰ ਗਏ ਤਾਂ ਉਹਨਾਂ ਵਲੋਂ ਦਿੱਤਾ ਕੋਡ ਦਿਓ ਤੇ ਜਾਰੀ ਰੱਖੋ ਦੱਬੋ।"
 
-#: ../src/bisho-pane-oauth.c:306
-msgid "Log in succeeded. You'll see new items in a couple of minutes."
-msgstr "ਲਾਗਇਨ ਸਫ਼ਲ ਰਿਹਾ ਹੈ। ਤੁਹਾਡੀ ਕੁਝ ਕੁ ਮਿੰਟਾਂ ਵਿੱਚ ਨਵੀਆਂ ਆਈਟਮਾਂ ਵੇਖੋਗੇ।"
-
-#: ../src/bisho-pane-oauth.c:373
+#: ../src/bisho-pane-oauth.c:399
 msgid "Code:"
 msgstr "ਕੋਡ:"
 
-#: ../src/bisho-window.c:81 ../src/bisho-window.c:97
+#: ../src/bisho-pane-username.c:57
+#, c-format
+msgid "%s login changed."
+msgstr "%s ਲਾਗਇਨ ਬਦਲਿਆ"
+
+#: ../src/bisho-window.c:76 ../src/bisho-window.c:83
 msgid "Username:"
 msgstr "ਯੂਜ਼ਰ-ਨਾਂ:"
 
-#: ../src/bisho-window.c:103
+#: ../src/bisho-window.c:85
 msgid "Password:"
 msgstr "ਪਾਸਵਰਡ:"
 
+#: ../src/bisho-window.c:171
+msgid "Quit"
+msgstr ""
+
 #. Please don't translate 'myzone'
-#: ../src/bisho-window.c:178
+#: ../src/bisho-window.c:182
 msgid ""
 "Set up your social networks to see new updates in myzone and the status "
 "panel."
 msgstr "ਆਪਣਾ ਸ਼ੋਸ਼ਲ ਨੈੱਟਵਰਕ ਸੈੱਟਅੱਪ ਕਰੋ ਤਾਂ ਕਿ ਮੇਰੇ-ਜ਼ੋਨ ਅਤੇ ਹਾਲਤ ਪੈਨਲ ਲਈ ਨਵੇਂ ਅੱਪਡੇਟ ਵੇਖ ਸਕੋ।"
 
-#: ../src/entry.c:57
-#, c-format
-msgid "%s login changed."
-msgstr "%s ਲਾਗਇਨ ਬਦਲਿਆ"
+#~ msgid "Log in pending"
+#~ msgstr "ਲਾਗਇਨ ਕਰਨਾ ਬਾਕੀ"
+
+#~ msgid "Log in pending..."
+#~ msgstr "ਲਾਗਇਨ ਬਾਕੀ ਹੈ..."
+
+#~ msgid "Logged in as %s"
+#~ msgstr "%s ਵਜੋਂ ਲਾਗਇਨ ਕੀਤਾ"
+
+#~ msgid "Logged in"
+#~ msgstr "ਲਾਗਇਨ"
+
+#~ msgid "<b>Status:</b>"
+#~ msgstr "<b>ਹਾਲਤ:</b>"
 
 #~ msgid ""
 #~ "You'll need an account with %s and an Internet connection to use this web "
@@ -150,6 +158,3 @@ msgstr "%s ਲਾਗਇਨ ਬਦਲਿਆ"
 
 #~ msgid "Press Continue to continue the log in."
 #~ msgstr "ਲਾਗਇਨ ਕਰਨ ਲਈ ਜਾਰੀ ਰੱਖਣ ਵਾਸਤੇ ਜਾਰੀ ਰੱਖੋ ਦੱਬੋ।"
-
-#~ msgid "Once you have logged in to Flickr, press Continue."
-#~ msgstr "ਜਦੋਂ ਤੁਸੀਂ ਫਲਿੱਕਰ 'ਚ ਲਾਗਇਨ ਕਰ ਗਏ ਤਾਂ ਜਾਰੀ ਰੱਖੋ ਦੱਬੋ।"

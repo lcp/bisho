@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Bisho 2.x\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-08-15 09:21+0000\n"
+"POT-Creation-Date: 2010-01-07 18:06+0800\n"
 "PO-Revision-Date: 2009-08-21 14:32+0200\n"
 "Last-Translator: Gil Forcada <gilforcada@guifi.net>\n"
 "Language-Team: Catalan <tradgnome@softcatala.org>\n"
@@ -15,101 +15,143 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../data/bisho.desktop.in.h:1
-msgid "Web Services"
-msgstr "Serveis web"
+#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:146
+msgid "My Web Accounts"
+msgstr ""
 
-#: ../data/bisho.desktop.in.h:2
+#. Please don't translate "myzone"
+#: ../data/bisho.desktop.in.h:3
 msgid "myzone & status"
 msgstr "la meva zona i el meu estat"
 
-#: ../src/bisho-facebook-pane.c:273 ../src/bisho-pane-flickr.c:228
-#: ../src/bisho-pane-oauth.c:244
-msgid "Log in pending"
-msgstr "Falta autenticar-se"
+#: ../src/bisho-pane.c:86
+msgid "Launch site for more information."
+msgstr "Per a més informació obre el lloc."
 
-#: ../src/bisho-facebook-pane.c:274 ../src/bisho-pane-flickr.c:229
-#: ../src/bisho-pane-oauth.c:245
-msgid "Log me in"
-msgstr "Autentica'm"
-
-#: ../src/bisho-facebook-pane.c:279 ../src/bisho-pane-flickr.c:234
-#: ../src/bisho-pane-oauth.c:250
-msgid "Log in pending..."
-msgstr "Falta autenticar-se..."
-
-#: ../src/bisho-facebook-pane.c:280 ../src/bisho-pane-flickr.c:235
-#: ../src/bisho-pane-oauth.c:251
-msgid "Working..."
-msgstr "S'està treballant..."
-
-#: ../src/bisho-facebook-pane.c:284
-msgid "Press Continue to continue the log in."
-msgstr "Premeu «Continuar» per a continuar l'autenticació."
-
-#: ../src/bisho-facebook-pane.c:285 ../src/bisho-pane-oauth.c:264
-msgid "Continue"
-msgstr "Continuar"
-
-#: ../src/bisho-facebook-pane.c:292 ../src/bisho-pane-flickr.c:241
-#, c-format
-msgid "Logged in as %s"
-msgstr "Autenticat com a %s"
-
-#: ../src/bisho-facebook-pane.c:296 ../src/bisho-pane-flickr.c:245
-#: ../src/bisho-pane-oauth.c:270
-msgid "Logged in"
-msgstr "Autenticat"
-
-#: ../src/bisho-facebook-pane.c:298 ../src/bisho-pane-flickr.c:247
-#: ../src/bisho-pane-oauth.c:271
-msgid "Log me out"
-msgstr "Surt"
-
-#: ../src/bisho-facebook-pane.c:362 ../src/bisho-pane-flickr.c:327
-#: ../src/bisho-pane-oauth.c:327
-msgid "<b>Status:</b>"
-msgstr "<b>Estat:</b>"
-
-#: ../src/bisho-pane.c:53
-#, c-format
+#: ../src/bisho-pane.c:90
+#, fuzzy, c-format
 msgid ""
-"You'll need an account with %s and an Internet connection to use this web "
-"service."
+"<small>You'll need an account with %s and an Internet connection to use this "
+"web service.</small>"
 msgstr ""
 "Necessiteu un compte a %s i una connexió a Internet per fer servir aquest "
 "servei web."
 
-#: ../src/bisho-pane-oauth.c:259
+#: ../src/bisho-pane.c:195
+#, c-format
+msgid "Sorry, we can't log in to %s. %s"
+msgstr ""
+
+#: ../src/bisho-pane.c:199
+#, c-format
+msgid "Sorry, we can't log in to %s"
+msgstr ""
+
+#: ../src/bisho-pane-facebook.c:329 ../src/bisho-pane-flickr.c:267
+#: ../src/bisho-pane-oauth.c:314
+msgid "Log me in"
+msgstr "Autentica'm"
+
+#: ../src/bisho-pane-facebook.c:335 ../src/bisho-pane-flickr.c:273
+#: ../src/bisho-pane-oauth.c:320
+msgid "Working..."
+msgstr "S'està treballant..."
+
+#. Use the same string in bisho-pane-oauth.c for translations.
+#: ../src/bisho-pane-facebook.c:342 ../src/bisho-pane-oauth.c:328
 #, c-format
 msgid "Once you have logged in to %s, press Continue."
 msgstr "Un cop us hagueu autenticat a %s, premeu «Continuar»."
 
-#: ../src/bisho-window.c:96
-msgid "Launch site for more information."
-msgstr "Per a més informació obre el lloc."
+#: ../src/bisho-pane-facebook.c:347 ../src/bisho-pane-flickr.c:278
+#: ../src/bisho-pane-oauth.c:333 ../src/bisho-pane-oauth.c:350
+msgid "Continue"
+msgstr "Continuar"
 
-#: ../src/bisho-window.c:107 ../src/bisho-window.c:123
+#: ../src/bisho-pane-facebook.c:352 ../src/bisho-pane-flickr.c:282
+#: ../src/bisho-pane-oauth.c:355
+msgid "Log in succeeded. You'll see new items in a couple of minutes."
+msgstr ""
+
+#: ../src/bisho-pane-facebook.c:355 ../src/bisho-pane-flickr.c:285
+#: ../src/bisho-pane-oauth.c:357
+msgid "Log me out"
+msgstr "Surt"
+
+#: ../src/bisho-pane-flickr.c:277
+#, fuzzy
+msgid "Once you have logged in to Flickr, press Continue."
+msgstr "Un cop us hagueu autenticat a %s, premeu «Continuar»."
+
+#: ../src/bisho-pane-oauth.c:86
+msgid "You don't seem to have a network connection, this won't work."
+msgstr ""
+
+#: ../src/bisho-pane-oauth.c:87
+msgid "You could check that the computer's clock is correct."
+msgstr ""
+
+#: ../src/bisho-pane-oauth.c:88
+msgid "You could try again."
+msgstr ""
+
+#: ../src/bisho-pane-oauth.c:345
+#, fuzzy, c-format
+msgid ""
+"Once you have logged in to %s, enter the code they give you and press "
+"Continue."
+msgstr "Un cop us hagueu autenticat a %s, premeu «Continuar»."
+
+#: ../src/bisho-pane-oauth.c:399
+msgid "Code:"
+msgstr ""
+
+#: ../src/bisho-pane-username.c:57
+#, c-format
+msgid "%s login changed."
+msgstr "S'ha canviat l'usuari de %s."
+
+#: ../src/bisho-window.c:76 ../src/bisho-window.c:83
 msgid "Username:"
 msgstr "Nom d'usuari:"
 
-#: ../src/bisho-window.c:129
+#: ../src/bisho-window.c:85
 msgid "Password:"
 msgstr "Contrasenya:"
 
-#: ../src/bisho-window.c:202
-msgid "Web Services Settings"
-msgstr "Paràmetres dels serveis web"
+#: ../src/bisho-window.c:171
+msgid "Quit"
+msgstr ""
 
-#: ../src/bisho-window.c:209
+#. Please don't translate 'myzone'
+#: ../src/bisho-window.c:182
 msgid ""
 "Set up your social networks to see new updates in myzone and the status "
 "panel."
 msgstr ""
-"Configureu les vostres xarxes socials per a veure les actualitzacions a "
-"la meva zona i al quadre d'estat."
+"Configureu les vostres xarxes socials per a veure les actualitzacions a la "
+"meva zona i al quadre d'estat."
 
-#: ../src/bisho-window.c:232
-#, c-format
-msgid "%s login changed."
-msgstr "S'ha canviat l'usuari de %s."
+#~ msgid "Web Services"
+#~ msgstr "Serveis web"
+
+#~ msgid "Log in pending"
+#~ msgstr "Falta autenticar-se"
+
+#~ msgid "Log in pending..."
+#~ msgstr "Falta autenticar-se..."
+
+#~ msgid "Press Continue to continue the log in."
+#~ msgstr "Premeu «Continuar» per a continuar l'autenticació."
+
+#~ msgid "Logged in as %s"
+#~ msgstr "Autenticat com a %s"
+
+#~ msgid "Logged in"
+#~ msgstr "Autenticat"
+
+#~ msgid "<b>Status:</b>"
+#~ msgstr "<b>Estat:</b>"
+
+#~ msgid "Web Services Settings"
+#~ msgstr "Paràmetres dels serveis web"

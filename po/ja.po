@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-02 16:13+0000\n"
+"POT-Creation-Date: 2010-01-07 18:06+0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: GLSJPN_Etsuko <etsuko.murozono@ptiglobal.net>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "X-Poedit-Language: Japanese\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:169
+#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:146
 msgid "My Web Accounts"
 msgstr "マイ Web アカウント"
 
@@ -22,11 +22,11 @@ msgstr "マイ Web アカウント"
 msgid "myzone & status"
 msgstr "myzone & ステータス"
 
-#: ../src/bisho-pane.c:79
+#: ../src/bisho-pane.c:86
 msgid "Launch site for more information."
 msgstr "サイトにアクセスして、詳細をご覧ください。"
 
-#: ../src/bisho-pane.c:83
+#: ../src/bisho-pane.c:90
 #, c-format
 msgid ""
 "<small>You'll need an account with %s and an Internet connection to use this "
@@ -35,47 +35,54 @@ msgstr ""
 "<small>この Web サービスを使用するには、%s のアカウントとインターネット接続が"
 "必要です。</small>"
 
-#: ../src/bisho-pane-flickr.c:245
-msgid "Log in pending"
-msgstr "ログイン中です"
-
-#: ../src/bisho-pane-flickr.c:246 ../src/bisho-pane-oauth.c:265
-msgid "Log me in"
-msgstr "ログインする"
-
-#: ../src/bisho-pane-flickr.c:251
-msgid "Log in pending..."
-msgstr "ログイン中です..."
-
-#: ../src/bisho-pane-flickr.c:252 ../src/bisho-pane-oauth.c:270
-msgid "Working..."
-msgstr "処理中です..."
-
-#: ../src/bisho-pane-flickr.c:258
-#, c-format
-msgid "Logged in as %s"
-msgstr "ログインしています：%s"
-
-#: ../src/bisho-pane-flickr.c:262
-msgid "Logged in"
-msgstr "ログインしました"
-
-#: ../src/bisho-pane-flickr.c:264 ../src/bisho-pane-oauth.c:307
-msgid "Log me out"
-msgstr "ログアウトする"
-
-#: ../src/bisho-pane-flickr.c:345
-msgid "<b>Status:</b>"
-msgstr "<b>ステータス：</b>"
-
-#: ../src/bisho-pane-oauth.c:85
-msgid "You don't seem to have a network connection, this won't work."
-msgstr "ネットワーク接続がないようです。これは使えません。"
-
-#: ../src/bisho-pane-oauth.c:86
+#: ../src/bisho-pane.c:195
 #, c-format
 msgid "Sorry, we can't log in to %s. %s"
 msgstr "%s にログインできません： %s"
+
+#: ../src/bisho-pane.c:199
+#, c-format
+msgid "Sorry, we can't log in to %s"
+msgstr "%s にログインできません"
+
+#: ../src/bisho-pane-facebook.c:329 ../src/bisho-pane-flickr.c:267
+#: ../src/bisho-pane-oauth.c:314
+msgid "Log me in"
+msgstr "ログインする"
+
+#: ../src/bisho-pane-facebook.c:335 ../src/bisho-pane-flickr.c:273
+#: ../src/bisho-pane-oauth.c:320
+msgid "Working..."
+msgstr "処理中です..."
+
+#. Use the same string in bisho-pane-oauth.c for translations.
+#: ../src/bisho-pane-facebook.c:342 ../src/bisho-pane-oauth.c:328
+#, c-format
+msgid "Once you have logged in to %s, press Continue."
+msgstr "%s にログイン後、コンティニューをクリックしてください。"
+
+#: ../src/bisho-pane-facebook.c:347 ../src/bisho-pane-flickr.c:278
+#: ../src/bisho-pane-oauth.c:333 ../src/bisho-pane-oauth.c:350
+msgid "Continue"
+msgstr "コンティニュー"
+
+#: ../src/bisho-pane-facebook.c:352 ../src/bisho-pane-flickr.c:282
+#: ../src/bisho-pane-oauth.c:355
+msgid "Log in succeeded. You'll see new items in a couple of minutes."
+msgstr "ログインに成功しました。数分内に新しいアイテムが表示されます。"
+
+#: ../src/bisho-pane-facebook.c:355 ../src/bisho-pane-flickr.c:285
+#: ../src/bisho-pane-oauth.c:357
+msgid "Log me out"
+msgstr "ログアウトする"
+
+#: ../src/bisho-pane-flickr.c:277
+msgid "Once you have logged in to Flickr, press Continue."
+msgstr "Flickr にログイン後、コンティニューをクリックしてください。"
+
+#: ../src/bisho-pane-oauth.c:86
+msgid "You don't seem to have a network connection, this won't work."
+msgstr "ネットワーク接続がないようです。これは使えません。"
 
 #: ../src/bisho-pane-oauth.c:87
 msgid "You could check that the computer's clock is correct."
@@ -85,21 +92,7 @@ msgstr "コンピューターの時刻が正しいか確認してみてくださ
 msgid "You could try again."
 msgstr "再度試してください。"
 
-#: ../src/bisho-pane-oauth.c:112 ../src/bisho-pane-oauth.c:206
-#, c-format
-msgid "Sorry, we can't log in to %s"
-msgstr "%s にログインできません"
-
-#: ../src/bisho-pane-oauth.c:278
-#, c-format
-msgid "Once you have logged in to %s, press Continue."
-msgstr "%s にログイン後、コンティニューをクリックしてください。"
-
-#: ../src/bisho-pane-oauth.c:283 ../src/bisho-pane-oauth.c:300
-msgid "Continue"
-msgstr "コンティニュー"
-
-#: ../src/bisho-pane-oauth.c:295
+#: ../src/bisho-pane-oauth.c:345
 #, c-format
 msgid ""
 "Once you have logged in to %s, enter the code they give you and press "
@@ -108,24 +101,29 @@ msgstr ""
 "%s にログイン後、受け取ったコードを入力し、コンティニューをクリックしてくださ"
 "い。"
 
-#: ../src/bisho-pane-oauth.c:306
-msgid "Log in succeeded. You'll see new items in a couple of minutes."
-msgstr "ログインに成功しました。数分内に新しいアイテムが表示されます。"
-
-#: ../src/bisho-pane-oauth.c:373
+#: ../src/bisho-pane-oauth.c:399
 msgid "Code:"
 msgstr "コード："
 
-#: ../src/bisho-window.c:81 ../src/bisho-window.c:97
+#: ../src/bisho-pane-username.c:57
+#, c-format
+msgid "%s login changed."
+msgstr "ログインが変更されました：%s"
+
+#: ../src/bisho-window.c:76 ../src/bisho-window.c:83
 msgid "Username:"
 msgstr "ユーザー名："
 
-#: ../src/bisho-window.c:103
+#: ../src/bisho-window.c:85
 msgid "Password:"
 msgstr "パスワード："
 
+#: ../src/bisho-window.c:171
+msgid "Quit"
+msgstr ""
+
 #. Please don't translate 'myzone'
-#: ../src/bisho-window.c:178
+#: ../src/bisho-window.c:182
 msgid ""
 "Set up your social networks to see new updates in myzone and the status "
 "panel."
@@ -133,10 +131,20 @@ msgstr ""
 "ソーシャル ネットワークを設定すると、myzone やステータスパネルに新しいアップ"
 "デートが表示されます。"
 
-#: ../src/entry.c:57
-#, c-format
-msgid "%s login changed."
-msgstr "ログインが変更されました：%s"
+#~ msgid "Log in pending"
+#~ msgstr "ログイン中です"
+
+#~ msgid "Log in pending..."
+#~ msgstr "ログイン中です..."
+
+#~ msgid "Logged in as %s"
+#~ msgstr "ログインしています：%s"
+
+#~ msgid "Logged in"
+#~ msgstr "ログインしました"
+
+#~ msgid "<b>Status:</b>"
+#~ msgstr "<b>ステータス：</b>"
 
 #~ msgid ""
 #~ "You'll need an account with %s and an Internet connection to use this web "
@@ -156,6 +164,3 @@ msgstr "ログインが変更されました：%s"
 
 #~ msgid "Web Services Settings"
 #~ msgstr "Web サービスの設定"
-
-#~ msgid "Once you have logged in to Flickr, press Continue."
-#~ msgstr "Flickr にログイン後、コンティニューをクリックしてください。"

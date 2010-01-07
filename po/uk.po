@@ -1,9 +1,9 @@
-# 
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-01 16:20+0000\n"
+"POT-Creation-Date: 2010-01-07 18:06+0800\n"
 "PO-Revision-Date: \n"
 "Last-Translator: Oleksii Baranov <aleksey.baranov@gmail.com>\n"
 "Language-Team: \n"
@@ -13,118 +13,137 @@ msgstr ""
 "X-Poedit-Language: Ukrainian\n"
 "X-Poedit-Country: UKRAINE\n"
 
+#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:146
+msgid "My Web Accounts"
+msgstr "Мої веб-облікові записи"
+
 #. Please don't translate "myzone"
 #: ../data/bisho.desktop.in.h:3
 msgid "myzone & status"
 msgstr "myzone і стан"
 
-#: ../src/bisho-pane.c:79
+#: ../src/bisho-pane.c:86
 msgid "Launch site for more information."
 msgstr "Відкрийте сайт щоб отримати більше інформації."
 
-#: ../src/bisho-pane-flickr.c:245
-msgid "Log in pending"
-msgstr "Очікування на вхід"
+#: ../src/bisho-pane.c:90
+#, c-format
+msgid ""
+"<small>You'll need an account with %s and an Internet connection to use this "
+"web service.</small>"
+msgstr ""
+"<small>Щоб скористатися цим веб сервісом, Вам потрібен обліковий запис на %s "
+"та підключення до Інтернету.</small>"
 
-#: ../src/bisho-pane-flickr.c:246 ../src/bisho-pane-oauth.c:265
+#: ../src/bisho-pane.c:195
+#, c-format
+msgid "Sorry, we can't log in to %s. %s"
+msgstr "Неможливо ввійти до %s. %s"
+
+#: ../src/bisho-pane.c:199
+#, c-format
+msgid "Sorry, we can't log in to %s"
+msgstr "Неможливо увійти до %s"
+
+#: ../src/bisho-pane-facebook.c:329 ../src/bisho-pane-flickr.c:267
+#: ../src/bisho-pane-oauth.c:314
 msgid "Log me in"
 msgstr "Впустіть мене"
 
-#: ../src/bisho-pane-flickr.c:251
-msgid "Log in pending..."
-msgstr "Очікування на вхід..."
-
-#: ../src/bisho-pane-flickr.c:252 ../src/bisho-pane-oauth.c:270
+#: ../src/bisho-pane-facebook.c:335 ../src/bisho-pane-flickr.c:273
+#: ../src/bisho-pane-oauth.c:320
 msgid "Working..."
 msgstr "Працюю..."
 
-#: ../src/bisho-pane-flickr.c:258
-#, c-format
-msgid "Logged in as %s"
-msgstr "Ви увійшли як %s"
-
-#: ../src/bisho-pane-flickr.c:262
-msgid "Logged in"
-msgstr "Вхід виконано"
-
-#: ../src/bisho-pane-flickr.c:264 ../src/bisho-pane-oauth.c:307
-msgid "Log me out"
-msgstr "Вийти"
-
-#: ../src/bisho-pane-flickr.c:345
-msgid "<b>Status:</b>"
-msgstr "<b>Стан:</b>"
-
-#: ../src/bisho-pane-oauth.c:278
+#. Use the same string in bisho-pane-oauth.c for translations.
+#: ../src/bisho-pane-facebook.c:342 ../src/bisho-pane-oauth.c:328
 #, c-format
 msgid "Once you have logged in to %s, press Continue."
 msgstr "Натисніть Далі після входу на %s."
 
-#: ../src/bisho-pane-oauth.c:283 ../src/bisho-pane-oauth.c:300
+#: ../src/bisho-pane-facebook.c:347 ../src/bisho-pane-flickr.c:278
+#: ../src/bisho-pane-oauth.c:333 ../src/bisho-pane-oauth.c:350
 msgid "Continue"
 msgstr "Далі"
 
-#: ../src/bisho-window.c:81 ../src/bisho-window.c:97
-msgid "Username:"
-msgstr "Логін:"
+#: ../src/bisho-pane-facebook.c:352 ../src/bisho-pane-flickr.c:282
+#: ../src/bisho-pane-oauth.c:355
+msgid "Log in succeeded. You'll see new items in a couple of minutes."
+msgstr "Вхід успішний. Ви побачите нові пункти протягом декількох хвилин."
 
-#: ../src/bisho-window.c:103
-msgid "Password:"
-msgstr "Пароль:"
+#: ../src/bisho-pane-facebook.c:355 ../src/bisho-pane-flickr.c:285
+#: ../src/bisho-pane-oauth.c:357
+msgid "Log me out"
+msgstr "Вийти"
 
-#. Please don't translate 'myzone'
-#: ../src/bisho-window.c:178
-msgid "Set up your social networks to see new updates in myzone and the status panel."
-msgstr "Налаштуйте свої соціальні мережі щоб побачити оновлення в myzone та на панелі стану"
+#: ../src/bisho-pane-flickr.c:277
+msgid "Once you have logged in to Flickr, press Continue."
+msgstr "Натисніть Далі після входу на Flickr."
 
-#: ../src/entry.c:57
-#, c-format
-msgid "%s login changed."
-msgstr "Логін %s змінено."
-
-#: ../src/bisho-pane-oauth.c:295
-#, c-format
-msgid "Once you have logged in to %s, enter the code they give you and press Continue."
-msgstr "Після входу на %s, введіть отриманий код та натисніть Далі."
-
-#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:169
-msgid "My Web Accounts"
-msgstr "Мої веб-облікові записи"
-
-#: ../src/bisho-pane.c:83
-#, c-format
-msgid "<small>You'll need an account with %s and an Internet connection to use this web service.</small>"
-msgstr "<small>Щоб скористатися цим веб сервісом, Вам потрібен обліковий запис на %s та підключення до Інтернету.</small>"
+#: ../src/bisho-pane-oauth.c:86
+msgid "You don't seem to have a network connection, this won't work."
+msgstr ""
+"Схоже, що ви не підключені до мережі, без підключення робота неможлива."
 
 #: ../src/bisho-pane-oauth.c:87
 msgid "You could check that the computer's clock is correct."
 msgstr "Ви можете перевірити правильність годинника комп'ютера."
 
-#: ../src/bisho-pane-oauth.c:86
-#, c-format
-msgid "Sorry, we can't log in to %s. %s"
-msgstr "Неможливо ввійти до %s. %s"
-
-#: ../src/bisho-pane-oauth.c:112 ../src/bisho-pane-oauth.c:206
-#, c-format
-msgid "Sorry, we can't log in to %s"
-msgstr "Неможливо увійти до %s"
-
 #: ../src/bisho-pane-oauth.c:88
 msgid "You could try again."
 msgstr "Ви можете спробувати знову."
 
-#: ../src/bisho-pane-oauth.c:306
-msgid "Log in succeeded. You'll see new items in a couple of minutes."
-msgstr "Вхід успішний. Ви побачите нові пункти протягом декількох хвилин."
+#: ../src/bisho-pane-oauth.c:345
+#, c-format
+msgid ""
+"Once you have logged in to %s, enter the code they give you and press "
+"Continue."
+msgstr "Після входу на %s, введіть отриманий код та натисніть Далі."
 
-#: ../src/bisho-pane-oauth.c:373
+#: ../src/bisho-pane-oauth.c:399
 msgid "Code:"
 msgstr "Код:"
 
-#: ../src/bisho-pane-oauth.c:85
-msgid "You don't seem to have a network connection, this won't work."
-msgstr "Схоже, що ви не підключені до мережі, без підключення робота неможлива."
+#: ../src/bisho-pane-username.c:57
+#, c-format
+msgid "%s login changed."
+msgstr "Логін %s змінено."
+
+#: ../src/bisho-window.c:76 ../src/bisho-window.c:83
+msgid "Username:"
+msgstr "Логін:"
+
+#: ../src/bisho-window.c:85
+msgid "Password:"
+msgstr "Пароль:"
+
+#: ../src/bisho-window.c:171
+msgid "Quit"
+msgstr ""
+
+#. Please don't translate 'myzone'
+#: ../src/bisho-window.c:182
+msgid ""
+"Set up your social networks to see new updates in myzone and the status "
+"panel."
+msgstr ""
+"Налаштуйте свої соціальні мережі щоб побачити оновлення в myzone та на "
+"панелі стану"
+
+#~ msgid "Log in pending"
+#~ msgstr "Очікування на вхід"
+
+#~ msgid "Log in pending..."
+#~ msgstr "Очікування на вхід..."
+
+#~ msgid "Logged in as %s"
+#~ msgstr "Ви увійшли як %s"
+
+#~ msgid "Logged in"
+#~ msgstr "Вхід виконано"
+
+#~ msgid "<b>Status:</b>"
+#~ msgstr "<b>Стан:</b>"
 
 #~ msgid "Web Services"
 #~ msgstr "Веб Сервіси"
@@ -134,6 +153,3 @@ msgstr "Схоже, що ви не підключені до мережі, бе�
 
 #~ msgid "Web Services Settings"
 #~ msgstr "Налаштування Веб Сервісів"
-
-#~ msgid "Once you have logged in to Flickr, press Continue."
-#~ msgstr "Натисніть Далі після входу на Flickr."

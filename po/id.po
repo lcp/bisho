@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bisho\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2009-10-16 11:25+0000\n"
+"POT-Creation-Date: 2010-01-07 18:06+0800\n"
 "PO-Revision-Date: 2009-08-25 16:48+0700\n"
 "Last-Translator: Andika Triwidada <andika@gmail.com>\n"
 "Language-Team: Indonesian <id@li.org>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:139
+#: ../data/bisho.desktop.in.h:1 ../src/bisho-window.c:146
 msgid "My Web Accounts"
 msgstr "Akun Webku"
 
@@ -29,8 +29,12 @@ msgstr "Luncurkan situs untuk info lebih lanjut."
 
 #: ../src/bisho-pane.c:90
 #, c-format
-msgid "<small>You'll need an account with %s and an Internet connection to use this web service.</small>"
-msgstr "<small>Anda perlu akun pada %s dan sambungan Internet untuk memakai layanan web ini.</small>"
+msgid ""
+"<small>You'll need an account with %s and an Internet connection to use this "
+"web service.</small>"
+msgstr ""
+"<small>Anda perlu akun pada %s dan sambungan Internet untuk memakai layanan "
+"web ini.</small>"
 
 #: ../src/bisho-pane.c:195
 #, c-format
@@ -42,49 +46,64 @@ msgstr "Maaf, kami tak bisa log masuk ke %s. %s"
 msgid "Sorry, we can't log in to %s"
 msgstr "Maaf, kami tak bisa log masuk ke %s"
 
-#: ../src/bisho-pane-flickr.c:243 ../src/bisho-pane-oauth.c:296
+#: ../src/bisho-pane-facebook.c:329 ../src/bisho-pane-flickr.c:267
+#: ../src/bisho-pane-oauth.c:314
 msgid "Log me in"
 msgstr "Masukkan saya"
 
-#: ../src/bisho-pane-flickr.c:249 ../src/bisho-pane-oauth.c:302
+#: ../src/bisho-pane-facebook.c:335 ../src/bisho-pane-flickr.c:273
+#: ../src/bisho-pane-oauth.c:320
 msgid "Working..."
 msgstr "Bekerja..."
 
-#: ../src/bisho-pane-flickr.c:252 ../src/bisho-pane-oauth.c:337
-msgid "Log in succeeded. You'll see new items in a couple of minutes."
-msgstr "Sukses log masuk. Anda akan melihat item baru dalam beberapa menit."
-
-#: ../src/bisho-pane-flickr.c:255 ../src/bisho-pane-oauth.c:339
-msgid "Log me out"
-msgstr "Keluarkan saya"
-
-#: ../src/bisho-pane-oauth.c:84
-msgid "You don't seem to have a network connection, this won't work."
-msgstr "Anda sepertinya tak memiliki sambungan jaringan, ini tak bisa."
-
-#: ../src/bisho-pane-oauth.c:85
-msgid "You could check that the computer's clock is correct."
-msgstr "Anda dapat memeriksa bahwa jam komputer benar."
-
-#: ../src/bisho-pane-oauth.c:86
-msgid "You could try again."
-msgstr "Anda dapat mencoba lagi."
-
-#: ../src/bisho-pane-oauth.c:310
+#. Use the same string in bisho-pane-oauth.c for translations.
+#: ../src/bisho-pane-facebook.c:342 ../src/bisho-pane-oauth.c:328
 #, c-format
 msgid "Once you have logged in to %s, press Continue."
 msgstr "Setelah anda masuk ke %s, tekan Lanjutkan."
 
-#: ../src/bisho-pane-oauth.c:315 ../src/bisho-pane-oauth.c:332
+#: ../src/bisho-pane-facebook.c:347 ../src/bisho-pane-flickr.c:278
+#: ../src/bisho-pane-oauth.c:333 ../src/bisho-pane-oauth.c:350
 msgid "Continue"
 msgstr "Lanjutkan"
 
-#: ../src/bisho-pane-oauth.c:327
-#, c-format
-msgid "Once you have logged in to %s, enter the code they give you and press Continue."
-msgstr "Setelah Anda masuk ke %s, masukkan kode yang mereka berikan padamu dan tekan Lanjutkan."
+#: ../src/bisho-pane-facebook.c:352 ../src/bisho-pane-flickr.c:282
+#: ../src/bisho-pane-oauth.c:355
+msgid "Log in succeeded. You'll see new items in a couple of minutes."
+msgstr "Sukses log masuk. Anda akan melihat item baru dalam beberapa menit."
 
-#: ../src/bisho-pane-oauth.c:378
+#: ../src/bisho-pane-facebook.c:355 ../src/bisho-pane-flickr.c:285
+#: ../src/bisho-pane-oauth.c:357
+msgid "Log me out"
+msgstr "Keluarkan saya"
+
+#: ../src/bisho-pane-flickr.c:277
+#, fuzzy
+msgid "Once you have logged in to Flickr, press Continue."
+msgstr "Setelah anda masuk ke %s, tekan Lanjutkan."
+
+#: ../src/bisho-pane-oauth.c:86
+msgid "You don't seem to have a network connection, this won't work."
+msgstr "Anda sepertinya tak memiliki sambungan jaringan, ini tak bisa."
+
+#: ../src/bisho-pane-oauth.c:87
+msgid "You could check that the computer's clock is correct."
+msgstr "Anda dapat memeriksa bahwa jam komputer benar."
+
+#: ../src/bisho-pane-oauth.c:88
+msgid "You could try again."
+msgstr "Anda dapat mencoba lagi."
+
+#: ../src/bisho-pane-oauth.c:345
+#, c-format
+msgid ""
+"Once you have logged in to %s, enter the code they give you and press "
+"Continue."
+msgstr ""
+"Setelah Anda masuk ke %s, masukkan kode yang mereka berikan padamu dan tekan "
+"Lanjutkan."
+
+#: ../src/bisho-pane-oauth.c:399
 msgid "Code:"
 msgstr "Kode:"
 
@@ -93,22 +112,26 @@ msgstr "Kode:"
 msgid "%s login changed."
 msgstr "Login %s diubah."
 
-#: ../src/bisho-window.c:75 ../src/bisho-window.c:82
+#: ../src/bisho-window.c:76 ../src/bisho-window.c:83
 msgid "Username:"
 msgstr "Nama pengguna:"
 
-#: ../src/bisho-window.c:84
+#: ../src/bisho-window.c:85
 msgid "Password:"
 msgstr "Kata sandi:"
 
-#. Please don't translate 'myzone'
-#: ../src/bisho-window.c:174
-msgid "Set up your social networks to see new updates in myzone and the status panel."
-msgstr "Siapkan jejaring sosial anda untuk melihat pembaruan di myzone dan panel status."
-
-#: ../src/bisho-window.c:163
+#: ../src/bisho-window.c:171
 msgid "Quit"
 msgstr "Keluar"
+
+#. Please don't translate 'myzone'
+#: ../src/bisho-window.c:182
+msgid ""
+"Set up your social networks to see new updates in myzone and the status "
+"panel."
+msgstr ""
+"Siapkan jejaring sosial anda untuk melihat pembaruan di myzone dan panel "
+"status."
 
 #~ msgid "Log in pending"
 #~ msgstr "Masuk tertunda"
