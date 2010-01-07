@@ -108,7 +108,7 @@ request_token_cb (OAuthProxy   *proxy,
   }
 
   url = create_url (info, oauth_proxy_get_token (OAUTH_PROXY (priv->proxy)));
-  bisho_webkit_open_url (gtk_widget_get_screen (GTK_WIDGET (pane)), priv->browser_info, url);
+  gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (pane)), url, GDK_CURRENT_TIME, NULL);
 
   if (info->oauth.callback == NULL) {
     update_widgets (pane, CONTINUE_AUTH_10);

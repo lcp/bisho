@@ -131,7 +131,7 @@ log_in_clicked (GtkWidget *button, gpointer user_data)
   rest_xml_node_unref (node);
 
   url = flickr_proxy_build_login_url (FLICKR_PROXY (priv->proxy), priv->info->flickr.frob);
-  bisho_webkit_open_url (gtk_widget_get_screen (GTK_WIDGET (button)), priv->browser_info, url);
+  gtk_show_uri (gtk_widget_get_screen (GTK_WIDGET (pane)), url, GDK_CURRENT_TIME, NULL);
 
   /* TODO wait for dbus call from callback */
   update_widgets (pane, CONTINUE_AUTH, NULL);
